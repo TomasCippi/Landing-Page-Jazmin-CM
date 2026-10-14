@@ -1,0 +1,113 @@
+---
+/* src/components/Nav.astro */
+import '../styles/nav.css';
+import Boton from './Buttons.astro';
+---
+
+<div class="nav_wrapper">
+  <nav class="nav_container" aria-label="Navegación principal">
+    <!-- Logo -->
+    <a href="#inicio" class="nav_logo" aria-label="Ir al inicio">
+      <img 
+        src="/logo.svg" 
+        alt="Luzsara Community Logo" 
+        class="nav_logo_img"
+        width="120"
+        height="36"
+      />
+    </a>
+
+    <!-- Enlaces conectados a las próximas secciones -->
+    <ul class="nav_links_container" id="nav-menu">
+      <div class="nav_water_drop" id="water-drop"></div>
+
+      <li><a href="#inicio" class="nav_link active">Inicio</a></li>
+      <li><a href="#sobre-mi" class="nav_link">Sobre Mí</a></li>
+      <li><a href="#servicios" class="nav_link">Mis servicios</a></li>
+      <li><a href="#como-trabajo" class="nav_link">Cómo trabajo</a></li>
+      <li><a href="#resenas" class="nav_link">Reseñas</a></li>
+      <li><a href="#faq" class="nav_link">Preguntas frecuentes</a></li>
+    </ul>
+
+    <!-- Botón de contacto rápido -->
+    <div class="nav_action">
+      <Boton texto="Hablemos" href="#contacto" variante="primaria" />
+    </div>
+  </nav>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const navMenu = document.getElementById('nav-menu');
+    const drop = document.getElementById('water-drop');
+    const links = document.querySelectorAll<HTMLAnchorElement>('.nav_link');
+
+    if (!navMenu || !drop || links.length === 0) return;
+
+    function updateDropPosition(element: HTMLElement) {
+      const parentRect = navMenu.getBoundingClientRect();
+      const elemRect = element.getBoundingClientRect();
+
+      const left = elemRect.left - parentRect.left;
+      const width = elemRect.width;
+
+      drop.style.left = `${left}px`;
+      drop.style.width = `${width}px`;
+      drop.style.opacity = '1';
+
+      drop.classList.add('moving');
+      setTimeout(() => drop.classList.remove('moving'), 350);
+    }
+
+    function initActive() {
+      const activeLink = document.querySelector<HTMLAnchorElement>('.nav_link.active');
+      if (activeLink) {
+        updateDropPosition(activeLink);
+      }
+    }
+
+    initActive();
+    window.addEventListener('resize', initActive);
+
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const targetId = link.getAttribute('href');
+        if (targetId && targetId.startsWith('#')) {
+          const targetSection = document.querySelector(targetId);
+          if (targetSection) {
+            e.preventDefault();
+            targetSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        updateDropPosition(link);
+      });
+    });
+
+    const sections = document.querySelectorAll('section[id], header[id]');
+    const observerOptions = {
+      root: null,
+      rootMargin: '-30% 0px -50% 0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          links.forEach(link => {
+            if (link.getAttribute('href') === `#${id}`) {
+              links.forEach(l => l.classList.remove('active'));
+              link.classList.add('active');
+              updateDropPosition(link);
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
+  });
+</script>

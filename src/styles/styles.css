@@ -47,3 +47,8 @@ body {
     font-family: var(--fuente-texto);
     -webkit-font-smoothing: antialiased;
 }
+
+/* Añade o verifica estas reglas en tu src/styles/styles.css */
+html {
+    scroll-behavior: smooth;
+}
