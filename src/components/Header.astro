@@ -1,0 +1,42 @@
+---
+import "../styles/header.css";
+import Boton from "./Buttons.astro";
+---
+
+<header class="header_container" id="inicio">
+    <div class="header_left_container">
+        <div class="left_text_container">
+            <h1 class="header_title">
+                <span class="title_line reveal" style="--i: 0">CONTENIDO CON</span>
+                <span class="title_line title_accent reveal" style="--i: 1">identidad</span>
+                <span class="title_line reveal" style="--i: 2">QUE SE VEA LINDO.</span>
+                <span class="title_line reveal" style="--i: 3">QUE TENGA SENTIDO.</span>
+            </h1>
+
+            <p class="header_text reveal" style="--i: 4">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, veniam ipsam! Laborum hic voluptates accusantium facere eos fuga, dolorum sunt.
+            </p>
+        </div>
+
+        <div class="left_buttons_container reveal" style="--i: 5">
+            <Boton texto="VER MIS SERVICIOS" href="#servicios" variante="primaria" />
+            <Boton texto="QUIERO TRABAJAR CON VOS" href="#contacto" variante="secundaria" />
+        </div>
+    </div>
+
+    <div class="header_right_container">
+        <img
+            src="/animations/logo_animado.svg"
+            alt="Logo animado de Luzsaracommunity"
+            width="400"
+            height="400"
+            fetchpriority="high"
+        />
+    </div>
+
+    <!-- Indicador de scroll (mouse) -->
+    <a class="mouse_button_container" href="#sobre-mi" aria-label="Bajar a la siguiente sección">
+        <span class="mouse_body"><span class="mouse_wheel"></span></span>
+        <span class="mouse_text">SCROLL</span>
+    </a>
+</header>

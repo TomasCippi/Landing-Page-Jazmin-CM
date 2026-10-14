@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-0.5 -0.5 350 350" width="512" height="512">
+  
+  <g transform="translate(174.5 174.5) scale(1) translate(-174.5 -174.5)">
+    <path d="M164.09 285.91l-1.63 1.83-1.07.89c-36.8 3.75-80.64 10.19-79.76-28.12L81.65 36.5C82.94 12.74 95.69 8.55 105.61 6.78l10.73-1.14-.95-2.01-81.82.03c-8.25 6.62 20.36-2.04 21.64 32.85l.12 223.92c-3.13 28.53-10.26 16.17-9.19 29.42 16.96 5.51 93.11 3.55 116.4 3.89l6.32 6.97-1.15-6.97 55.97.02c5.19-26.96 13.15-59.05-1.12-31.24a62.54 62.54 0 01-56.94 28.04Zm125.49 49.65c39.92-16.96 48.79-48.28 49.82-69.07 2.1-42.16-25.53-63.15-48.67-76.19l-16.25-8.69-41-19.07c-17.36-8.73-44.45-23.86-42.79-57.04a163.79 85.6 42.169 0176.84-47.28c20.7 5.1 39.94 22.49 46.61 47.66l1.95 8.37 1.98-.21-2.31-45.74c-1.08-1.85-35.41-15.08-64.26-15.42-35.49-.41-66.77 16.82-76.23 48.37a63.75 63.75 0 0013.41 62.07l8.38 7.98-11.76 10.06 1.29 1.24c21.01-10.98 4.53-12.17 28.62.23 48.16 25.88 92.06 32.92 103.91 73.07 2.66 9.03 9.4 44.12-20.38 67.85l-11.32 10.99Z"
+        fill="#FFFDF5" fill-opacity="0"
+        stroke="#FFFDF5" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round"
+        stroke-dasharray="2153.08154296875" stroke-dashoffset="2153.08154296875">
+      <animate attributeName="stroke-dashoffset"
+               from="2153.08154296875" to="0"
+               begin="0s" dur="1.8s"
+               fill="freeze"
+               calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"
+               values="2153.08154296875;0"/>
+      <animate attributeName="fill-opacity"
+               from="0" to="1"
+               begin="1.8s" dur="0.45s"
+               fill="freeze"/>
+    </path><path d="M168.86 300.71l5.44 12.01a72.02 72.02 0 0024.59 19.42 97.31 97.31 0 0033.62 10.04 106.72 106.72 0 0040.09-1.55l16.98-5.07-2.16-.82-10.93.89c-19.31 6.58-69.84 9.5-99.41-25.72Z"
+        fill="#FFFDF5" fill-opacity="0"
+        stroke="#FFFDF5" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round"
+        stroke-dasharray="272.1233825683594" stroke-dashoffset="272.1233825683594">
+      <animate attributeName="stroke-dashoffset"
+               from="272.1233825683594" to="0"
+               begin="0s" dur="1.8s"
+               fill="freeze"
+               calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"
+               values="272.1233825683594;0"/>
+      <animate attributeName="fill-opacity"
+               from="0" to="1"
+               begin="1.8s" dur="0.45s"
+               fill="freeze"/>
+    </path><path d="M186.59 182.6l-1.29-1.24-2.79 2.15c-25.56 25.82-31.21 64.64-24.63 94.86l3.51 10.26 1.07-.89 1.63-1.83c-8.05-21.8-8.51-65.75 17.07-95.74Z"
+        fill="#FFFDF5" fill-opacity="0"
+        stroke="#FFFDF5" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round"
+        stroke-dasharray="232.64523315429688" stroke-dashoffset="232.64523315429688">
+      <animate attributeName="stroke-dashoffset"
+               from="232.64523315429688" to="0"
+               begin="0s" dur="1.8s"
+               fill="freeze"
+               calcMode="spline" keySplines="0.42 0 0.58 1" keyTimes="0;1"
+               values="232.64523315429688;0"/>
+      <animate attributeName="fill-opacity"
+               from="0" to="1"
+               begin="1.8s" dur="0.45s"
+               fill="freeze"/>
+    </path>
+  </g>
+</svg>

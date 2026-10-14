@@ -1,0 +1,51 @@
+---
+import '../styles/buttons.css';
+
+interface Props {
+  texto: string;
+  href?: string;
+  variante?: 'primaria' | 'secundaria' | 'terciaria';
+}
+
+const { 
+  texto, 
+  href = "#", 
+  variante = "primaria" 
+} = Astro.props;
+---
+
+<a href={href} class={`btn btn--${variante}`}>
+  {texto}
+</a>
+
+<script>
+    // La luz del botón de vidrio sigue al cursor (solo dispositivos con mouse)
+    if (matchMedia("(hover: hover)").matches) {
+        document.querySelectorAll<HTMLElement>(".btn--secundaria").forEach((btn) => {
+            let raf = 0;
+            let x = 0;
+            let y = 0;
+
+            btn.addEventListener(
+                "pointermove",
+                (e) => {
+                    x = e.offsetX;
+                    y = e.offsetY;
+
+                    if (raf) return;
+                    raf = requestAnimationFrame(() => {
+                        btn.style.setProperty("--x", `${x}px`);
+                        btn.style.setProperty("--y", `${y}px`);
+                        raf = 0;
+                    });
+                },
+                { passive: true }
+            );
+
+            btn.addEventListener("pointerleave", () => {
+                btn.style.removeProperty("--x");
+                btn.style.removeProperty("--y");
+            });
+        });
+    }
+</script>
