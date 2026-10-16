@@ -1,0 +1,152 @@
+---
+import "../styles/about.css";
+import Boton from "./Buttons.astro";
+
+// Chips: íconos SVG inline (cero peticiones externas)
+const chips = [
+    {
+        label: "Estrategia",
+        icon: `<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>`,
+    },
+    {
+        label: "Creatividad",
+        icon: `<path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>`,
+    },
+    {
+        label: "Comunidad",
+        icon: `<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>`,
+    },
+];
+---
+
+<section class="about_container" id="sobre-mi" data-nav-theme="light">
+    <!-- ======================================================================
+         OLAS DE FONDO (Optimizado para GPU)
+         ====================================================================== -->
+    <div class="about_waves" aria-hidden="true">
+        <svg
+            class="about_waves_svg"
+            viewBox="0 0 1440 900"
+            preserveAspectRatio="xMidYMid slice"
+            fill="none"
+            focusable="false"
+        >
+            <defs>
+                <linearGradient id="about_wave_grad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0" stop-color="#5cb9bd" stop-opacity="0" />
+                    <stop offset="0.15" stop-color="#5cb9bd" stop-opacity="0.9" />
+                    <stop offset="0.85" stop-color="#2c969a" stop-opacity="0.95" />
+                    <stop offset="1" stop-color="#2c969a" stop-opacity="0" />
+                </linearGradient>
+            </defs>
+
+            <!-- Ola principal: sube desde la izquierda y hace el rulo arriba a la derecha -->
+            <g class="wave" style="--i: 0">
+                <path class="soft" pathLength="1" d="M-60 700 C190 690 400 570 620 440 S1010 190 1230 160 C1350 144 1440 196 1408 262 C1386 306 1318 296 1322 250" />
+                <path class="core" pathLength="1" d="M-60 700 C190 690 400 570 620 440 S1010 190 1230 160 C1350 144 1440 196 1408 262 C1386 306 1318 296 1322 250" />
+            </g>
+
+            <!-- Ola del medio: pasa por debajo del texto -->
+            <g class="wave" style="--i: 1">
+                <path class="soft" pathLength="1" d="M-80 640 C160 710 420 700 650 600 S1000 430 1200 380" />
+                <path class="core" pathLength="1" d="M-80 640 C160 710 420 700 650 600 S1000 430 1200 380" />
+            </g>
+
+            <!-- Rulo inferior central -->
+            <g class="wave" style="--i: 2">
+                <path class="core" pathLength="1" d="M430 880 C560 770 700 720 810 720 C890 720 920 790 872 822 C832 848 790 812 822 780" />
+            </g>
+
+            <!-- Líneas suaves de apoyo abajo a la izquierda -->
+            <g class="wave" style="--i: 3">
+                <path class="core" pathLength="1" d="M-100 780 C140 760 380 810 600 770" />
+            </g>
+
+            <g class="wave" style="--i: 4">
+                <path class="thin" pathLength="1" d="M-100 850 C160 830 420 880 700 840" />
+            </g>
+
+            <!-- Barrido derecho detrás de la foto -->
+            <g class="wave" style="--i: 5">
+                <path class="soft" pathLength="1" d="M1540 560 C1420 610 1280 650 1120 730" />
+                <path class="core" pathLength="1" d="M1540 560 C1420 610 1280 650 1120 730" />
+            </g>
+        </svg>
+    </div>
+
+    <div class="about_content">
+        <!-- ==================================================================
+             COLUMNA IZQUIERDA: texto
+             ================================================================== -->
+        <div class="about_left">
+            <span class="about_dash about_item" style="--i: 0" aria-hidden="true"></span>
+
+            <h2 class="about_title">
+                <span class="about_title_mask">
+                    <span class="about_title_main">HOLA, SOY JAZ</span>
+                </span>
+                <span class="about_title_accent">
+                    <span class="about_title_text">creatividad con propósito</span>
+                </span>
+            </h2>
+
+            <p class="about_text about_item" style="--i: 3">
+                Acompaño marcas que quieren comunicar con intención, conectar con su comunidad y crecer sin perder su esencia.
+            </p>
+
+            <!-- Chips con íconos -->
+            <div class="about_chips">
+                {
+                    chips.map((chip, index) => (
+                        <div class="about_chip about_item" style={`--i: ${4 + index}`}>
+                            <span class="about_chip_icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true" set:html={chip.icon} />
+                            </span>
+                            <span>{chip.label}</span>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <div class="about_item" style="--i: 7">
+                <Boton texto="VER MI PORTAFOLIO" href="#resenas" variante="primaria" />
+            </div>
+        </div>
+
+        <!-- ==================================================================
+             COLUMNA DERECHA: foto estática
+             ================================================================== -->
+        <div class="about_right">
+            <img
+                class="about_person_img"
+                src="/jazmin.webp"
+                alt="Foto de Luz, community manager"
+                width="520"
+                height="650"
+                loading="lazy"
+                decoding="async"
+            />
+        </div>
+    </div>
+</section>
+
+<script>
+    const about = document.getElementById("sobre-mi");
+
+    if (about) {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                for (const entry of entries) {
+                    if (entry.isIntersecting) {
+                        about.classList.add("is_visible");
+                        about.setAttribute("data-inview", "");
+                    } else {
+                        about.removeAttribute("data-inview");
+                    }
+                }
+            },
+            { threshold: 0.2 }
+        );
+        observer.observe(about);
+    }
+</script>

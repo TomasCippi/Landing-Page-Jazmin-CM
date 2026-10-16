@@ -1,0 +1,534 @@
+/* ==========================================================================
+   ABOUT (Sobre mí)
+   Paleta 100% fiel a la Guía de Marca:
+   - Fondo base: var(--color-base) (#f1e5d5)
+   - Título y acentos fuertes: var(--color-principal) (#2c969a)
+   - Detalles secundarios: var(--color-secundario) (#5cb9bd)
+   - Subrayado: var(--color-acento) (#faec7f)
+   - Texto de lectura: var(--color-oscuro) (#102d30)
+   ========================================================================== */
+
+/* DESPUÉS */
+.about_container {
+    --about-ink: #1f6f74;
+    --about-ink-dark: #0b3a3e;
+    --about-title: clamp(36px, min(5vw, 9vh), 84px);
+    --about-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --about-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+    position: relative;
+    z-index: 2; /* Lo pone por encima del header para que proyecte la sombra */
+    isolation: isolate;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+    background: var(--color-base);
+    color: var(--about-ink);
+
+    /* Sombra hacia arriba sobre el header */
+    box-shadow: 0 -24px 48px rgb(0 0 0 / 0.45);
+
+    /* ======================================================================
+       2. OLAS DE FONDO (Aceleradas por GPU)
+       ====================================================================== */
+
+    & .about_waves {
+        position: absolute;
+        inset: -2%;
+        z-index: 0;
+        pointer-events: none;
+        will-change: transform;
+        animation: aboutFlotar 18s ease-in-out infinite alternate;
+    }
+
+    & .about_waves_svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    & .wave path {
+        fill: none;
+        stroke: url(#about_wave_grad);
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 1;
+        stroke-dashoffset: 1;
+        opacity: 0;
+    }
+
+    & .wave .soft {
+        stroke-width: 52;
+        stroke-opacity: 0.14;
+    }
+
+    & .wave .core {
+        stroke-width: 24;
+        stroke-opacity: 0.38;
+    }
+
+    & .wave .thin {
+        stroke-width: 6;
+        stroke-opacity: 0.35;
+    }
+
+    &.is_visible .wave path {
+        animation: aboutDibujar 2s var(--about-out) forwards;
+        animation-delay: calc(var(--i, 0) * 180ms + 150ms);
+    }
+
+    &:not([data-inview]) .about_waves {
+        animation-play-state: paused;
+    }
+
+    /* ======================================================================
+       3. LAYOUT
+       ====================================================================== */
+
+    & .about_content {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        gap: 40px;
+        width: min(85%, 1280px);
+        height: 100%;
+        margin-inline: auto;
+        padding-top: 96px;
+    }
+
+    & .about_left {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: clamp(14px, 2.5vh, 24px);
+        flex: 0 1 54%;
+        min-width: 0;
+        padding-bottom: 5vh;
+    }
+
+    & .about_item {
+        opacity: 0;
+    }
+
+    &.is_visible .about_item {
+        animation: aboutSubir 0.8s var(--about-out) forwards;
+        animation-delay: calc(var(--i, 0) * 110ms + 300ms);
+    }
+
+    /* ======================================================================
+       4. TÍTULO CON COLORES DE MARCA
+       ====================================================================== */
+
+    & .about_dash {
+        display: block;
+        width: 52px;
+        height: 5px;
+        border-radius: 999px;
+        background: var(--color-secundario);
+        box-shadow: 0 2px 10px rgb(92 185 189 / 0.4);
+    }
+
+    & .about_title {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        font-weight: 400;
+    }
+
+    & .about_title_mask {
+        display: block;
+        overflow: hidden;
+        padding-bottom: 0.08em;
+        margin-bottom: -0.08em;
+    }
+
+    & .about_title_main {
+        display: block;
+        font-family: var(--fuente-titulo);
+        font-size: var(--about-title);
+        font-weight: 400;
+        line-height: 1.05;
+        letter-spacing: 1px;
+        color: var(--color-principal); /* Verde petróleo oficial */
+        transform: translate3d(0, 115%, 0);
+    }
+
+    &.is_visible .about_title_main {
+        animation: aboutSubirTexto 1s var(--about-out) 0.25s forwards;
+    }
+
+    & .about_title_accent {
+        position: relative;
+        isolation: isolate;
+        display: inline-block;
+        width: fit-content;
+        margin-top: calc(var(--about-title) * -0.05);
+        font-family: var(--fuente-script);
+        font-size: calc(var(--about-title) * 1.05);
+        line-height: 1.1;
+        color: var(--color-oscuro); /* Oscuro de marca para contraste nítido sobre amarillo */
+
+        /* Marcador Amarillo Luz (#FAEC7F) de la guía de marca */
+        &::before {
+            content: "";
+            position: absolute;
+            left: -0.15em;
+            right: -0.15em;
+            top: 52%;
+            z-index: -1;
+            height: 44%;
+            border-radius: 999px;
+            background: var(--color-acento);
+            transform: rotate(-1deg) scaleX(0);
+            transform-origin: left center;
+        }
+    }
+
+    & .about_title_text {
+        display: inline-block;
+        clip-path: inset(-20% 100% -30% 0);
+    }
+
+    &.is_visible .about_title_accent::before {
+        animation: aboutMarcador 1s var(--about-out) 0.95s forwards;
+    }
+
+    &.is_visible .about_title_text {
+        animation: aboutEscribir 1.25s cubic-bezier(0.65, 0, 0.35, 1) 0.7s forwards;
+    }
+
+    /* ======================================================================
+       5. PÁRRAFO Y CHIPS
+       ====================================================================== */
+
+    & .about_text {
+        max-width: 29em;
+        font-family: var(--fuente-texto);
+        font-size: clamp(15px, min(1.25vw, 2.5vh), 19px);
+        line-height: 1.65;
+        color: var(--color-oscuro);
+        opacity: 0.9;
+    }
+
+    & .about_chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    & .about_chip {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 18px 6px 6px;
+        border: 1px solid rgb(44 150 154 / 0.22);
+        border-radius: 999px;
+        background: rgb(255 255 255 / 0.78);
+        box-shadow: 0 4px 14px rgb(44 150 154 / 0.08);
+        font-family: var(--fuente-texto);
+        font-size: clamp(13px, min(0.95vw, 2vh), 15px);
+        font-weight: 600;
+        line-height: 1;
+        color: var(--color-oscuro);
+        cursor: default;
+        transition:
+            transform 0.45s var(--about-spring),
+            background-color 0.25s ease,
+            border-color 0.25s ease,
+            box-shadow 0.25s ease;
+    }
+
+    & .about_chip_icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: clamp(28px, 4.2vh, 34px);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: var(--color-principal);
+        color: var(--color-base);
+        transition:
+            transform 0.45s var(--about-spring),
+            background-color 0.25s ease;
+
+        & svg {
+            width: 54%;
+            height: 54%;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+    }
+
+    @media (hover: hover) {
+        & .about_chip:hover {
+            border-color: var(--color-secundario);
+            background: #ffffff;
+            box-shadow: 0 10px 24px rgb(44 150 154 / 0.16);
+            transform: translateY(-3px) scale(1.03);
+
+            & .about_chip_icon {
+                background: var(--color-secundario);
+                color: var(--color-oscuro);
+                transform: rotate(-10deg) scale(1.1);
+            }
+        }
+    }
+
+    &.is_visible .about_chip.about_item {
+        animation-name: aboutPop;
+        animation-duration: 0.75s;
+        animation-timing-function: var(--about-spring);
+    }
+
+    /* ======================================================================
+       6. BOTÓN (Verde Petróleo oficial con texto Crema)
+       ====================================================================== */
+
+    & .about_left .btn--primaria {
+        border-color: var(--color-principal);
+        background: var(--color-principal);
+        box-shadow: 0 8px 22px rgb(44 150 154 / 0.3);
+        color: var(--color-base);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+        & .about_left .btn--primaria:hover {
+            background: #237c80;
+            border-color: #237c80;
+            box-shadow: 0 14px 30px rgb(44 150 154 / 0.42);
+        }
+    }
+
+    /* ======================================================================
+       7. FOTO (100% Estática sin efecto hover)
+       ====================================================================== */
+
+    & .about_right {
+        position: relative;
+        isolation: isolate;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        flex: 0 1 44%;
+        min-width: 0;
+        opacity: 0;
+        transform-origin: bottom center;
+
+        /* Halo turquesa y amarillo suave detrás de la foto */
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: -10%;
+            left: 50%;
+            z-index: -1;
+            width: 110%;
+            aspect-ratio: 1;
+            translate: -50% 0;
+            border-radius: 50%;
+            background: radial-gradient(
+                circle closest-side,
+                rgb(92 185 189 / 0.35),
+                rgb(250 236 127 / 0.15) 55%,
+                transparent
+            );
+            pointer-events: none;
+        }
+    }
+
+    &.is_visible .about_right {
+        animation: aboutEntrarFoto 1.2s var(--about-out) 0.4s forwards;
+    }
+
+    & .about_person_img {
+        display: block;
+        width: auto;
+        max-width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: bottom center;
+        pointer-events: none; /* Imagen completamente estática */
+        user-select: none;
+    }
+
+    /* ======================================================================
+       8. RESPONSIVE
+       ====================================================================== */
+
+    @media (max-width: 1180px) {
+        & .about_content {
+            width: 90%;
+            gap: 24px;
+        }
+    }
+
+    @media (max-width: 900px) {
+        --about-title: clamp(32px, 9.5vw, 50px);
+
+        height: auto;
+        min-height: 100svh;
+
+        & .about_content {
+            flex-direction: column;
+            align-items: center;
+            gap: 28px;
+            width: calc(100% - 40px);
+            height: auto;
+            padding-top: 104px;
+        }
+
+        & .about_left {
+            align-items: center;
+            flex: 0 0 auto;
+            padding-bottom: 0;
+            text-align: center;
+        }
+
+        & .about_title {
+            align-items: center;
+        }
+
+        & .about_chips {
+            justify-content: center;
+        }
+
+        & .about_right {
+            flex: 0 0 auto;
+            width: 100%;
+            height: min(44svh, 380px);
+        }
+    }
+
+    /* ======================================================================
+       9. ACCESIBILIDAD
+       ====================================================================== */
+
+    @media (prefers-reduced-motion: reduce) {
+        & .about_waves {
+            animation: none;
+        }
+
+        & .about_item,
+        &.is_visible .about_item,
+        & .about_right,
+        &.is_visible .about_right {
+            opacity: 1;
+            animation: none;
+        }
+
+        & .about_title_main,
+        &.is_visible .about_title_main {
+            transform: none;
+            animation: none;
+        }
+
+        & .about_title_text,
+        &.is_visible .about_title_text {
+            clip-path: none;
+            animation: none;
+        }
+
+        & .about_title_accent::before,
+        &.is_visible .about_title_accent::before {
+            transform: rotate(-1deg) scaleX(1);
+            animation: none;
+        }
+
+        & .wave path,
+        &.is_visible .wave path {
+            opacity: 1;
+            stroke-dashoffset: 0;
+            animation: none;
+        }
+    }
+}
+
+/* ==========================================================================
+   10. KEYFRAMES
+   ========================================================================== */
+
+@keyframes aboutDibujar {
+    0% {
+        opacity: 1;
+        stroke-dashoffset: 1;
+    }
+    100% {
+        opacity: 1;
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes aboutFlotar {
+    from {
+        transform: translate3d(-1%, 0.6%, 0);
+    }
+    to {
+        transform: translate3d(1%, -0.6%, 0);
+    }
+}
+
+@keyframes aboutSubir {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 22px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes aboutPop {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 12px, 0) scale(0.85);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+@keyframes aboutSubirTexto {
+    from {
+        transform: translate3d(0, 115%, 0);
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes aboutEscribir {
+    from {
+        clip-path: inset(-20% 100% -30% 0);
+    }
+    to {
+        clip-path: inset(-20% -5% -30% 0);
+    }
+}
+
+@keyframes aboutMarcador {
+    from {
+        transform: rotate(-1deg) scaleX(0);
+    }
+    to {
+        transform: rotate(-1deg) scaleX(1);
+    }
+}
+
+@keyframes aboutEntrarFoto {
+    from {
+        opacity: 0;
+        transform: translate3d(50px, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
