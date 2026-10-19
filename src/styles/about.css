@@ -307,25 +307,30 @@
     }
 
     /* ======================================================================
-       7. FOTO (100% Estática sin efecto hover)
+       7. FOTO (Ocupa ~80vh de alto en cualquier pantalla y apoya en el fondo)
        ====================================================================== */
 
     & .about_right {
-        position: relative;
+        position: absolute;
+        bottom: 0;
+        right: 3%;
+        z-index: 1;
         isolation: isolate;
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: flex-end;
-        flex: 0 1 44%;
-        min-width: 0;
+        height: 82vh; /* Fuerza la altura al 82% de la pantalla */
+        width: auto;
+        max-width: 48vw;
         opacity: 0;
+        pointer-events: none;
         transform-origin: bottom center;
 
         /* Halo turquesa y amarillo suave detrás de la foto */
         &::before {
             content: "";
             position: absolute;
-            bottom: -10%;
+            bottom: -5%;
             left: 50%;
             z-index: -1;
             width: 110%;
@@ -349,11 +354,11 @@
     & .about_person_img {
         display: block;
         width: auto;
+        height: 100%; /* Llena todo el alto del contenedor 82vh */
         max-width: 100%;
-        height: 100%;
         object-fit: contain;
-        object-position: bottom center;
-        pointer-events: none; /* Imagen completamente estática */
+        object-position: bottom right;
+        pointer-events: none;
         user-select: none;
     }
 
@@ -399,9 +404,18 @@
         }
 
         & .about_right {
+            position: relative;
+            bottom: auto;
+            right: auto;
             flex: 0 0 auto;
             width: 100%;
             height: min(44svh, 380px);
+            justify-content: center;
+            opacity: 1; /* Asegura visibilidad en pantallas chicas */
+
+            & .about_person_img {
+                object-position: bottom center;
+            }
         }
     }
 

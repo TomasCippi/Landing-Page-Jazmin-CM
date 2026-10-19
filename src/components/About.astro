@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import jazminImg from "../assets/jazmin.webp";
 import "../styles/about.css";
 import Boton from "./Buttons.astro";
 
@@ -114,15 +116,15 @@ const chips = [
         </div>
 
         <!-- ==================================================================
-             COLUMNA DERECHA: foto estática
+             COLUMNA DERECHA: foto estática con componente Image de Astro
              ================================================================== -->
         <div class="about_right">
-            <img
+            <Image
                 class="about_person_img"
-                src="/jazmin.webp"
-                alt="Foto de Luz, community manager"
-                width="520"
-                height="650"
+                src={jazminImg}
+                alt="Foto de Jazmín, community manager"
+                width={520}
+                height={650}
                 loading="lazy"
                 decoding="async"
             />
