@@ -1,0 +1,322 @@
+.reviews_section {
+    /* Paleta oficial de Guía de Marca */
+    --brand-petroleo: #2C969A;
+    --turquesa: #5CB9BD;
+    --crema-base: #F1E5D5;
+    --amarillo-acento: #FAEC7F;
+    --texto-oscuro: #164245;
+
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--crema-base);
+    color: var(--texto-oscuro);
+    box-sizing: border-box;
+    padding: clamp(40px, 6vh, 80px) 0;
+    overflow: hidden;
+    content-visibility: auto;
+    contain-intrinsic-size: auto 85vh;
+}
+
+/* Íconos turquesa flotantes mas grandes y visibles */
+.floating_icon {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    fill: var(--turquesa);
+    opacity: 0.65;
+    animation: float_anim 5s ease-in-out infinite;
+}
+
+.floating_icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.icon_1 { top: 10%; left: 5%; width: 48px; height: 48px; animation-delay: 0s; }
+.icon_2 { top: 18%; right: 6%; width: 56px; height: 56px; animation-delay: 1.2s; }
+.icon_3 { bottom: 20%; left: 7%; width: 42px; height: 42px; animation-delay: 2.5s; }
+.icon_4 { bottom: 12%; right: 8%; width: 50px; height: 50px; animation-delay: 3.8s; }
+
+@keyframes float_anim {
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    50% { transform: translateY(-14px) rotate(12deg) scale(1.08); }
+}
+
+.reviews_container {
+    position: relative;
+    z-index: 1;
+    width: min(92%, 1280px);
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(28px, 4vh, 48px);
+}
+
+.reviews_header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+}
+
+.reviews_kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--fuente-script);
+    font-size: clamp(28px, 3.2vw, 38px);
+    line-height: 1;
+    color: var(--brand-petroleo);
+    font-weight: 700;
+}
+
+.reviews_spark {
+    width: 22px;
+    height: 22px;
+    fill: var(--brand-petroleo);
+    animation: spark_twinkle 3.2s ease-in-out infinite;
+}
+
+@keyframes spark_twinkle {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    50% { transform: scale(0.65) rotate(45deg); opacity: 0.5; }
+}
+
+.reviews_title {
+    font-family: var(--fuente-titulo);
+    font-size: clamp(48px, 6.5vw, 84px);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--brand-petroleo);
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.reviews_stage {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+.reviews_track {
+    display: flex;
+    gap: 24px;
+    width: 100%;
+    margin: 0;
+    padding: 16px 4%;
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+}
+
+.reviews_track::-webkit-scrollbar {
+    display: none;
+}
+
+.reviews_slide {
+    flex: 0 0 85%;
+    max-width: 380px;
+    scroll-snap-align: center;
+    will-change: transform;
+}
+
+.reviews_frame {
+    position: relative;
+    margin: 0;
+    border-radius: 24px;
+    background: #ffffff;
+    padding: 8px;
+    border: 1px solid rgba(44, 150, 154, 0.2);
+    box-shadow: 0 15px 30px -10px rgba(44, 150, 154, 0.15);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.reviews_img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 18px;
+    object-fit: cover;
+}
+
+.reviews_dots {
+    display: flex;
+    gap: 8px;
+}
+
+.reviews_dot {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.reviews_dot::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(44, 150, 154, 0.3);
+    transition: width 0.3s ease, background 0.3s ease;
+}
+
+.reviews_dot.is_active::before {
+    width: 28px;
+    background: var(--brand-petroleo);
+}
+
+/* Tarjeta CTA limpia sin bordes extraños */
+.reviews_cta {
+    position: relative;
+    width: min(100%, 720px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    text-align: center;
+    padding: clamp(28px, 4vh, 42px) clamp(24px, 5vw, 48px);
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 12px 30px -10px rgba(44, 150, 154, 0.12);
+}
+
+.reviews_cta_title {
+    font-family: var(--fuente-titulo);
+    font-size: clamp(22px, 2.8vw, 30px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--brand-petroleo);
+    margin: 0;
+    text-wrap: balance;
+}
+
+.reviews_cta_desc {
+    font-family: var(--fuente-texto);
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--texto-oscuro);
+    max-width: 50ch;
+    margin: 0;
+    font-weight: 500;
+    text-wrap: pretty;
+}
+
+.reviews_cta_actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 6px;
+}
+
+/* Regla estricta: Botón en Verde Petróleo (#2C969A) con texto Crema (#F1E5D5) */
+.reviews_cta_actions :global(a),
+.reviews_cta_actions :global(button) {
+    background-color: var(--brand-petroleo) !important;
+    color: var(--crema-base) !important;
+    border: none !important;
+    font-family: var(--fuente-texto) !important;
+    font-weight: 700 !important;
+    padding: 14px 28px !important;
+    border-radius: 999px !important;
+    box-shadow: 0 8px 20px rgba(44, 150, 154, 0.3) !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.reviews_cta_actions :global(a:hover),
+.reviews_cta_actions :global(button:hover) {
+    background-color: var(--texto-oscuro) !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(22, 66, 69, 0.4) !important;
+}
+
+.rv {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: calc(var(--i, 0) * 80ms);
+    will-change: transform, opacity;
+}
+
+.is_inview .rv {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (min-width: 900px) {
+    .reviews_track {
+        overflow: visible;
+        justify-content: center;
+        gap: 36px;
+        padding: 24px 0 36px;
+        scroll-snap-type: none;
+    }
+    
+    .reviews_slide {
+        flex: 0 1 370px;
+        max-width: 370px;
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .reviews_slide:nth-child(1) {
+        transform: rotate(-4deg) translateY(14px);
+    }
+    
+    .reviews_slide:nth-child(2) {
+        transform: rotate(2.5deg) translateY(-14px);
+    }
+
+    .reviews_slide:nth-child(3) {
+        transform: rotate(-3deg) translateY(10px);
+    }
+    
+    .reviews_slide:hover {
+        transform: translateY(-16px) rotate(0deg) scale(1.05) !important;
+        z-index: 10;
+    }
+
+    .reviews_slide:hover .reviews_frame {
+        box-shadow: 0 25px 50px -12px rgba(44, 150, 154, 0.28);
+    }
+    
+    .reviews_dots {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .rv {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    .reviews_spark,
+    .floating_icon {
+        animation: none;
+    }
+    .reviews_slide,
+    .reviews_frame {
+        transition: none;
+    }
+}

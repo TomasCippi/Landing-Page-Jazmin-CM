@@ -172,3 +172,22 @@
         }
     }
 }
+
+/* ==========================================================================
+   TURQUESA: Color secundario de marca (#5CB9BD) con texto oscuro legible
+   ========================================================================== */
+
+   .btn--turquesa {
+    border: 1px solid rgba(44, 150, 154, 0.3);
+    background: #5CB9BD;
+    box-shadow: 0 4px 14px rgba(92, 185, 189, 0.35);
+    color: #123f42; /* Texto oscuro de contraste para accesibilidad */
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            background: #2C969A; /* Cambia al verde petróleo principal en hover */
+            color: #f1e5d5; /* Texto color crema de la guía */
+            box-shadow: 0 8px 22px rgba(44, 150, 154, 0.45);
+        }
+    }
+}
