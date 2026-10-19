@@ -1,0 +1,197 @@
+---
+import "../styles/process.css";
+import Boton from "./Buttons.astro";
+
+const steps = [
+    {
+        num: "01",
+        title: "Brief",
+        desc: "Te paso un brief con preguntas para conocer a fondo tu marca.",
+    },
+    {
+        num: "02",
+        title: "Reunión inicial",
+        desc: "Coordinamos una reunión virtual (Meet o Zoom) o presencial, según tu preferencia y ubicación.",
+    },
+    {
+        num: "03",
+        title: "Tu documento de marca",
+        desc: "Armo un PDF con tus objetivos y toda la información de tu marca.",
+    },
+    {
+        num: "04",
+        title: "Calendario del mes",
+        desc: "Planificamos juntos el contenido de cada mes.",
+    },
+    {
+        num: "05",
+        title: "Manos a la obra",
+        desc: "Llevo adelante la estrategia del mes en tus redes.",
+    },
+    {
+        num: "06",
+        title: "Resultados",
+        desc: "Te entrego las métricas: lo que logramos, los cambios que hicimos y cómo seguimos.",
+    },
+];
+---
+
+<section class="process_section" id="como-trabajo" data-nav-theme="dark">
+    <!-- Fondo: olas que derivan lento + luces con parallax -->
+    <div class="process_bg" aria-hidden="true">
+        <div class="process_dots"></div>
+        <div class="wave wave_1"></div>
+        <div class="wave wave_2"></div>
+        <div class="wave wave_3"></div>
+        <div class="process_glow"></div>
+        <div class="process_glow_2"></div>
+    </div>
+
+    <div class="process_container">
+        <!-- CABECERA -->
+        <header class="process_header" data-reveal>
+            <h2 class="process_title rv" style="--i: 0">
+                Mi forma de <span class="process_title_accent">trabajar</span>
+            </h2>
+            <p class="process_subtitle rv" style="--i: 1">
+                ¿Qué pasa después de que te escribo? Este es el recorrido que hacemos para darle vida a tus redes.
+            </p>
+        </header>
+
+        <!-- LÍNEA DE TIEMPO -->
+        <ol class="timeline" data-timeline>
+            <div class="timeline_rail" aria-hidden="true">
+                <div class="timeline_progress"></div>
+            </div>
+
+            {steps.map((step, idx) => (
+                <li class={`step ${idx % 2 === 0 ? "is_left" : "is_right"}`} data-step data-reveal>
+                    <div class="step_node" aria-hidden="true">
+                        <span class="step_dot"></span>
+                    </div>
+
+                    <article class="step_card">
+                        <span class="step_num rv" style="--i: 0">{step.num}</span>
+                        <h3 class="step_title rv" style="--i: 1">{step.title}</h3>
+                        <p class="step_desc rv" style="--i: 2">{step.desc}</p>
+                    </article>
+                </li>
+            ))}
+        </ol>
+
+        <!-- LLAMADO A LA ACCIÓN -->
+        <div class="cta" data-reveal>
+            <div class="cta_orb" aria-hidden="true"></div>
+            <h4 class="cta_title rv" style="--i: 0">
+                ¿Empezamos a <em class="cta_script">potenciar</em> tu marca?
+            </h4>
+            <p class="cta_desc rv" style="--i: 1">
+                Contame qué necesita tu marca y armamos juntos una estrategia que tenga sentido.
+            </p>
+            <div class="cta_button rv" style="--i: 2">
+                <Boton
+                    texto="HABLEMOS POR WHATSAPP"
+                    href="https://wa.me/5491134292032"
+                    variante="primaria"
+                />
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const section = document.getElementById("como-trabajo");
+
+    if (section) {
+        const timeline = section.querySelector<HTMLElement>("[data-timeline]");
+        const steps = Array.from(section.querySelectorAll<HTMLElement>("[data-step]"));
+        const dots = steps.map((s) => s.querySelector<HTMLElement>(".step_dot")!);
+        const clamp = (v: number, min = 0, max = 1) => Math.min(max, Math.max(min, v));
+
+        /* ---------- 1. Reveal al entrar en pantalla ---------- */
+        const reveal = new IntersectionObserver(
+            (entries, obs) => {
+                for (const entry of entries) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is_inview");
+                        obs.unobserve(entry.target);
+                    }
+                }
+            },
+            { threshold: 0.2, rootMargin: "0px 0px -8% 0px" }
+        );
+        section.querySelectorAll("[data-reveal]").forEach((el) => reveal.observe(el));
+
+        /* ---------- 2. Línea de tiempo que se enciende con el scroll ---------- */
+        if (timeline && steps.length) {
+            let lineTop = 0;
+            let lineHeight = 1;
+            let sectionVisible = false;
+            let ticking = false;
+
+            // Mide de punto a punto para que la línea empiece en el primero y termine en el último
+            const measure = () => {
+                const tl = timeline.getBoundingClientRect();
+                const first = dots[0].getBoundingClientRect();
+                const last = dots[dots.length - 1].getBoundingClientRect();
+                lineTop = first.top + first.height / 2 - tl.top;
+                lineHeight = Math.max(1, last.top + last.height / 2 - first.top - first.height / 2);
+                timeline.style.setProperty("--line-top", `${lineTop}px`);
+                timeline.style.setProperty("--line-h", `${lineHeight}px`);
+            };
+
+            const update = () => {
+                ticking = false;
+                const vh = window.innerHeight;
+                const focus = vh * 0.6; // altura de la pantalla donde "se enciende" cada paso
+                const tl = timeline.getBoundingClientRect();
+
+                timeline.style.setProperty(
+                    "--p",
+                    clamp((focus - (tl.top + lineTop)) / lineHeight).toFixed(4)
+                );
+
+                let current = -1;
+                dots.forEach((dot, i) => {
+                    const r = dot.getBoundingClientRect();
+                    const on = r.top + r.height / 2 <= focus;
+                    steps[i].classList.toggle("is_active", on);
+                    if (on) current = i;
+                });
+                steps.forEach((s, i) => s.classList.toggle("is_current", i === current));
+
+                // Parallax de las luces del fondo
+                const sr = section.getBoundingClientRect();
+                section.style.setProperty(
+                    "--sp",
+                    clamp((vh - sr.top) / (sr.height + vh)).toFixed(3)
+                );
+            };
+
+            const request = () => {
+                if (!sectionVisible || ticking) return;
+                ticking = true;
+                requestAnimationFrame(update);
+            };
+
+            new IntersectionObserver(
+                ([entry]) => {
+                    sectionVisible = entry.isIntersecting;
+                    if (sectionVisible) request();
+                },
+                { rootMargin: "100px 0px" }
+            ).observe(section);
+
+            const refresh = () => {
+                measure();
+                request();
+            };
+
+            window.addEventListener("scroll", request, { passive: true });
+            window.addEventListener("resize", refresh);
+            new ResizeObserver(refresh).observe(timeline);
+            document.fonts?.ready.then(refresh);
+            refresh();
+        }
+    }
+</script>
