@@ -36,13 +36,9 @@ const steps = [
 ];
 ---
 
-<section class="process_section" id="como-trabajo" data-nav-theme="dark">
-    <!-- Fondo: olas que derivan lento + luces con parallax -->
+<section class="process_section" id="como-trabajo" data-nav-theme="light">
+    <!-- Luces sutiles con parallax integradas al fondo crema -->
     <div class="process_bg" aria-hidden="true">
-        <div class="process_dots"></div>
-        <div class="wave wave_1"></div>
-        <div class="wave wave_2"></div>
-        <div class="wave wave_3"></div>
         <div class="process_glow"></div>
         <div class="process_glow_2"></div>
     </div>
@@ -79,7 +75,7 @@ const steps = [
             ))}
         </ol>
 
-        <!-- LLAMADO A LA ACCIÓN -->
+        <!-- LLAMADO A LA ACCIÓN (Estilo Banner de Servicios) -->
         <div class="cta" data-reveal>
             <div class="cta_orb" aria-hidden="true"></div>
             <h4 class="cta_title rv" style="--i: 0">
@@ -108,7 +104,6 @@ const steps = [
         const dots = steps.map((s) => s.querySelector<HTMLElement>(".step_dot")!);
         const clamp = (v: number, min = 0, max = 1) => Math.min(max, Math.max(min, v));
 
-        /* ---------- 1. Reveal al entrar en pantalla ---------- */
         const reveal = new IntersectionObserver(
             (entries, obs) => {
                 for (const entry of entries) {
@@ -118,18 +113,16 @@ const steps = [
                     }
                 }
             },
-            { threshold: 0.2, rootMargin: "0px 0px -8% 0px" }
+            { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
         );
         section.querySelectorAll("[data-reveal]").forEach((el) => reveal.observe(el));
 
-        /* ---------- 2. Línea de tiempo que se enciende con el scroll ---------- */
         if (timeline && steps.length) {
             let lineTop = 0;
             let lineHeight = 1;
             let sectionVisible = false;
             let ticking = false;
 
-            // Mide de punto a punto para que la línea empiece en el primero y termine en el último
             const measure = () => {
                 const tl = timeline.getBoundingClientRect();
                 const first = dots[0].getBoundingClientRect();
@@ -143,7 +136,7 @@ const steps = [
             const update = () => {
                 ticking = false;
                 const vh = window.innerHeight;
-                const focus = vh * 0.6; // altura de la pantalla donde "se enciende" cada paso
+                const focus = vh * 0.6; 
                 const tl = timeline.getBoundingClientRect();
 
                 timeline.style.setProperty(
@@ -160,7 +153,6 @@ const steps = [
                 });
                 steps.forEach((s, i) => s.classList.toggle("is_current", i === current));
 
-                // Parallax de las luces del fondo
                 const sr = section.getBoundingClientRect();
                 section.style.setProperty(
                     "--sp",
