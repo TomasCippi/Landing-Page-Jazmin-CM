@@ -1,21 +1,17 @@
 ---
-// Banner de números (#numeros). Estilos en src/styles/reviews.css
 import "../styles/reviews.css";
 ---
 
-<section class="stats_banner_section" id="numeros" data-pause-offscreen>
-    <!-- Fondo fijo: queda quieto al scrollear y el banner es la "ventana" -->
-    <div class="ocean_bg_fixed" aria-hidden="true">
-        <svg class="ocean_svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none">
-            <path class="wave_line wave_1" d="M-100,260 C240,200 480,320 720,260 C960,200 1200,320 1540,250 L1540,900 L-100,900 Z" />
-            <path class="wave_line wave_2" d="M-100,470 C300,400 520,540 800,470 C1060,410 1260,520 1540,460 L1540,900 L-100,900 Z" />
-            <path class="wave_line wave_3" d="M-100,680 C260,620 520,740 760,680 C1040,620 1240,720 1540,670 L1540,900 L-100,900 Z" />
+<section class="stats_banner_section" id="numeros">
+    <div class="stats_static_bg" aria-hidden="true">
+        <svg class="stats_static_svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none">
+            <path class="stats_static_wave stats_wave_1" d="M-100,260 C240,200 480,320 720,260 C960,200 1200,320 1540,250 L1540,900 L-100,900 Z" />
+            <path class="stats_static_wave stats_wave_2" d="M-100,470 C300,400 520,540 800,470 C1060,410 1260,520 1540,460 L1540,900 L-100,900 Z" />
+            <path class="stats_static_wave stats_wave_3" d="M-100,680 C260,620 520,740 760,680 C1040,620 1240,720 1540,670 L1540,900 L-100,900 Z" />
         </svg>
     </div>
 
-    <!-- Las posiciones (izquierda / derecha) se definen en el CSS con grid-template-areas -->
     <div class="reviews_content_wrapper">
-        <!-- Texto + botón (va a la derecha en desktop) -->
         <div class="stats_intro">
             <span class="stats_eyebrow stats_reveal" style="--i: 3">EN NÚMEROS</span>
 
@@ -39,7 +35,6 @@ import "../styles/reviews.css";
             </div>
         </div>
 
-        <!-- Los tres números (van a la izquierda en desktop) -->
         <ul class="stats_grid" role="list">
             <li class="stat_item stats_reveal" style="--i: 0">
                 <div class="stat_card">
@@ -72,7 +67,6 @@ import "../styles/reviews.css";
                 </div>
             </li>
 
-            <!-- Dato de ejemplo: cambiar data-target por el número real -->
             <li class="stat_item stats_reveal" style="--i: 2">
                 <div class="stat_card">
                     <span class="stat_icon" aria-hidden="true">
@@ -93,39 +87,35 @@ import "../styles/reviews.css";
 </section>
 
 <script>
-
     const section = document.getElementById("numeros");
     const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Cuenta de 0 hasta el número final
-    function animateCounter(counter) {
+    function animateCounter(counter: HTMLElement) {
         const target = Number(counter.dataset.target || 0);
 
-        // Si el usuario pidió menos movimiento, muestra el número final directo
         if (reduceMotion) {
-            counter.textContent = target;
+            counter.textContent = String(target);
             return;
         }
 
         const duration = 1400;
         const start = performance.now();
 
-        function tick(now) {
+        function tick(now: number) {
             const progress = Math.min((now - start) / duration, 1);
-            // Frena suave al final (ease-out exponencial)
             const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
 
-            counter.textContent = Math.round(eased * target);
+            counter.textContent = String(Math.round(eased * target));
             if (progress < 1) requestAnimationFrame(tick);
         }
 
         requestAnimationFrame(tick);
     }
 
-    // Muestra el banner y arranca los contadores
     function reveal() {
+        if (!section) return;
         section.classList.add("is_visible");
-        section.querySelectorAll(".counter").forEach(animateCounter);
+        section.querySelectorAll<HTMLElement>(".counter").forEach(animateCounter);
     }
 
     if (section) {
@@ -134,14 +124,13 @@ import "../styles/reviews.css";
                 (entries) => {
                     if (!entries[0].isIntersecting) return;
                     reveal();
-                    observer.disconnect(); // solo la primera vez
+                    observer.disconnect();
                 },
                 { threshold: 0.2 }
             );
 
             observer.observe(section);
         } else {
-            // Navegadores muy viejos: mostrar todo de una
             reveal();
         }
     }

@@ -102,6 +102,7 @@ const proyectosPuntuales = [
                 </span>
             </h2>
         </header>
+
         <div class="services_group">
             <div class="group_header" data-srv-reveal>
                 <h3 class="group_title">GESTIÓN DE REDES</h3>
@@ -118,7 +119,6 @@ const proyectosPuntuales = [
                             data-srv-reveal
                         >
                             <div class="card_inner">
-                                <!-- FRENTE -->
                                 <div class="card_face card_front" data-face-front>
                                     <div class="card_top">
                                         <span class="card_num">{item.numero}</span>
@@ -145,7 +145,6 @@ const proyectosPuntuales = [
                                     </button>
                                 </div>
 
-                                <!-- DORSO (Toda la info entra sin overflow) -->
                                 <div class="card_face card_back" data-face-back aria-hidden="true" inert>
                                     <div class="card_back_top">
                                         <span class="card_back_script">{item.titulo}</span>
@@ -194,7 +193,6 @@ const proyectosPuntuales = [
                             data-srv-reveal
                         >
                             <div class="card_inner">
-                                <!-- FRENTE -->
                                 <div class="card_face card_front" data-face-front>
                                     <div class="card_top">
                                         <span class="card_num">{item.numero}</span>
@@ -224,7 +222,6 @@ const proyectosPuntuales = [
                                     </button>
                                 </div>
 
-                                <!-- DORSO -->
                                 <div class="card_face card_back" data-face-back aria-hidden="true" inert>
                                     <div class="card_back_top">
                                         <span class="card_back_script">{item.titulo}</span>
@@ -337,7 +334,6 @@ const proyectosPuntuales = [
             });
         });
 
-        // Cerrar con Escape
         document.addEventListener("keydown", (e) => {
             if (e.key === "Escape") {
                 cards.forEach((c) => {
@@ -346,17 +342,16 @@ const proyectosPuntuales = [
             }
         });
 
-        // Animación al scrollear (IntersectionObserver de alto rendimiento)
         const revealObserver = new IntersectionObserver(
             (entries, obs) => {
                 for (const entry of entries) {
                     if (entry.isIntersecting) {
                         entry.target.classList.add("is_inview");
-                        obs.unobserve(entry.target); // Deja de observar una vez animado para ahorrar CPU
+                        obs.unobserve(entry.target);
                     }
                 }
             },
-            { threshold: 0.18, rootMargin: "0px 0px -6% 0px" }
+            { threshold: 0.15, rootMargin: "0px 0px -6% 0px" }
         );
 
         const titleEl = section.querySelector("[data-srv-title]");

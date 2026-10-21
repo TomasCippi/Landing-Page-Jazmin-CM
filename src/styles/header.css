@@ -1,6 +1,4 @@
-/* ==========================================================================
-   HEADER (HERO)
-   ========================================================================== */
+/* src/styles/header.css */
 
 :root {
     --gradient-1: #2c969a;
@@ -9,14 +7,8 @@
     --gradient-4: #287f98;
 }
 
-/* ==========================================================================
-   CONTENEDOR
-   Ocupa toda la pantalla y centra el contenido con flex.
-   El tamaño del título se cambia solo con --h1-size.
-   ========================================================================== */
-
 .header_container {
-    --h1-size: 56px;
+    --h1-size: 64px; 
 
     position: relative;
     isolation: isolate;
@@ -29,9 +21,8 @@
     height: 100vh;
     height: 100svh;
     padding: 80px;
-    background: var(--color-oscuro);
+    background: var(--color-oscuro, #102d30);
 
-    /* ----- Fondo: luces turquesas (movimiento lento y suave) ----- */
     &::before {
         content: "";
         position: absolute;
@@ -47,7 +38,6 @@
         will-change: transform;
     }
 
-    /* ----- Fondo: reflejo amarillo independiente ----- */
     &::after {
         content: "";
         position: absolute;
@@ -70,15 +60,10 @@
         will-change: transform;
     }
 
-    /* ----- Entrada escalonada (el orden se define con style="--i: N") ----- */
     & .reveal {
-        animation: subirSuave 0.7s var(--ease-out) backwards;
+        animation: subirSuave 0.7s var(--ease-out, ease-out) backwards;
         animation-delay: calc(var(--i, 0) * 110ms + 80ms);
     }
-
-    /* ======================================================================
-       LADO IZQUIERDO
-       ====================================================================== */
 
     & .header_left_container {
         display: flex;
@@ -93,90 +78,67 @@
     & .left_text_container {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 12px;
     }
 
-    /* ----- Título ----- */
+    & .header_subtitle {
+        font-family: var(--fuente-script, 'Great Vibes', cursive);
+        font-size: clamp(28px, 3.5vw, 40px);
+        color: var(--color-acento, #FAEC7F);
+        line-height: 1;
+    }
+
     & .header_title {
-        font-family: var(--fuente-titulo);
+        font-family: var(--fuente-titulo, 'The Youngest Serif', serif);
         font-weight: 400;
         font-size: var(--h1-size);
-        line-height: 1;
-        letter-spacing: 1px;
-        color: var(--color-base);
+        line-height: 0.9; /* Reducido para juntar las líneas blancas */
+        letter-spacing: 0.5px;
+        color: var(--color-base, #F1E5D5);
     }
 
-    /* Cada línea en su renglón. Hover: se corre un poco con resorte */
-    & .title_line {
-        display: block;
-        width: fit-content;
-        transition: transform 0.5s var(--ease-spring);
-    }
-
-    /* "identidad": script en color de acento, pisa un poco la línea de arriba */
     & .title_accent {
+        font-family: var(--fuente-script, 'Great Vibes', cursive);
+        font-size: calc(var(--h1-size) * 1.6); 
+        color: var(--color-acento, #FAEC7F);
         position: relative;
-        z-index: 1;
-        margin-top: calc(var(--h1-size) * -0.37);
-        margin-bottom: calc(var(--h1-size) * -0.2);
-        font-family: var(--fuente-script);
-        font-size: calc(var(--h1-size) * 1.7);
-        line-height: 0.9;
-        letter-spacing: 0;
-        color: var(--color-acento);
-        text-shadow: 0 0 32px rgb(250 236 127 / 0.35);
-        transform-origin: left center;
-        transition:
-            transform 0.5s var(--ease-spring),
-            text-shadow 0.4s ease;
+        display: inline-block;
+        line-height: 0.7;
+        padding: 0 6px;
+        z-index: 2;
+        
+        margin-top: calc(var(--h1-size) * -0.38);
+        margin-bottom: calc(var(--h1-size) * -0.15);
+        
+        transform-origin: center;
+        transition: transform 0.5s ease;
 
-        /* Línea de acento que se dibuja en el hover */
-        &::after {
-            content: "";
-            position: absolute;
-            left: 2%;
-            right: 2%;
-            bottom: 0.12em;
-            height: 3px;
-            border-radius: 999px;
-            background: linear-gradient(90deg, transparent, var(--color-acento), transparent);
-            transform: scaleX(0);
-            transform-origin: left center;
-            transition: transform 0.5s var(--ease-out);
-        }
-
-        /* Hover: crece, se inclina, brilla y se dibuja la línea */
         @media (hover: hover) {
             &:hover {
-                transform: scale(1.06) rotate(-2deg);
-                text-shadow: 0 0 36px rgb(250 236 127 / 0.7);
-
-                &::after {
-                    transform: scaleX(1);
-                }
+                transform: scale(1.05) rotate(-2deg);
             }
         }
     }
 
-    /* ----- Párrafo ----- */
     & .header_text {
-        max-width: 480px;
-        font-family: var(--fuente-texto);
-        font-size: 17px;
+        max-width: 500px;
+        font-family: var(--fuente-texto, 'Poppins', sans-serif);
+        font-size: clamp(15px, 1.3vw, 17px);
         line-height: 1.65;
-        color: rgb(241 229 213 / 0.85);
+        color: rgba(241, 229, 213, 0.9);
+        font-weight: 400;
+        margin-top: 8px;
     }
 
-    /* ----- Botones ----- */
     & .left_buttons_container {
         display: flex;
         flex-wrap: wrap;
         gap: 14px;
     }
 
-    /* ======================================================================
-       LADO DERECHO (logo animado)
-       ====================================================================== */
+    & .title_br_mobile {
+        display: none;
+    }
 
     & .header_right_container {
         display: flex;
@@ -190,25 +152,15 @@
             width: 100%;
             max-width: 420px;
             height: auto;
-            transition: transform 0.6s var(--ease-spring);
+            transition: transform 0.6s ease;
         }
 
-        /* Hover: se inclina y crece con resorte */
         @media (hover: hover) {
             &:hover img {
                 transform: scale(1.08) rotate(-4deg);
             }
         }
-
-        &:active img {
-            transform: scale(0.94);
-            transition-duration: 0.12s;
-        }
     }
-
-    /* ======================================================================
-       INDICADOR DE SCROLL (mouse)
-       ====================================================================== */
 
     & .mouse_button_container {
         position: absolute;
@@ -220,7 +172,7 @@
         align-items: center;
         gap: 6px;
         width: fit-content;
-        color: var(--color-base);
+        color: var(--color-base, #F1E5D5);
         text-decoration: none;
         animation: aparecer 0.8s ease 1.3s backwards;
     }
@@ -231,7 +183,7 @@
         justify-content: center;
         width: 20px;
         height: 32px;
-        border: 2px solid rgb(241 229 213 / 0.8);
+        border: 2px solid rgba(241, 229, 213, 0.8);
         border-radius: 999px;
     }
 
@@ -241,7 +193,7 @@
         width: 3px;
         height: 6px;
         border-radius: 999px;
-        background: var(--color-acento);
+        background: var(--color-acento, #FAEC7F);
         animation: ruedaMouse 1.6s ease-in-out infinite;
     }
 
@@ -251,54 +203,42 @@
         letter-spacing: 3px;
         opacity: 0.8;
     }
+}
 
-    /* ======================================================================
-       RESPONSIVE
-       ====================================================================== */
+/* ======================================================================
+   RESPONSIVE
+   ====================================================================== */
 
-    /* Pantallas grandes-medianas */
-    @media (max-width: 1280px) {
-        --h1-size: 48px;
-
-        & .header_left_container {
-            flex-basis: 540px;
-        }
-
-        & .header_right_container {
-            flex-basis: 340px;
-        }
+@media (max-width: 1280px) {
+    .header_container {
+        --h1-size: 54px;
+        & .header_left_container { flex-basis: 540px; }
+        & .header_right_container { flex-basis: 340px; }
     }
+}
 
-    /* Pantallas medianas */
-    @media (max-width: 1100px) {
-        --h1-size: 40px;
-
+@media (max-width: 1100px) {
+    .header_container {
+        --h1-size: 48px;
         gap: 16px;
         padding: 60px;
-
-        & .header_left_container {
-            flex-basis: 450px;
-        }
-
-        & .header_right_container {
-            flex-basis: 280px;
-        }
-
-        & .header_text {
-            font-size: 15px;
-        }
+        & .header_left_container { flex-basis: 450px; }
+        & .header_right_container { flex-basis: 280px; }
     }
+}
 
-    /* Celulares: una columna, logo arriba */
-    @media (max-width: 860px) {
-        --h1-size: 32px;
-
+/* Celulares */
+@media (max-width: 860px) {
+    .header_container {
+        --h1-size: 52px; /* Texto blanco más grande */
+        
         flex-direction: column;
-        gap: 24px;
-        height: auto;
-        min-height: 100svh;
-        padding: 100px 24px 110px;
+        justify-content: center;
         text-align: center;
+        padding: 0 24px;
+        height: 100vh;
+        height: 100svh;
+        overflow: hidden;
 
         &::after {
             display: none;
@@ -306,30 +246,51 @@
 
         & .header_left_container {
             align-items: center;
-            flex: 0 1 auto;
+            flex: 0 0 auto;
             width: 100%;
             max-width: 560px;
+            gap: 16px; /* Reducido para dar más espacio vertical */
         }
 
         & .left_text_container {
             align-items: center;
+            gap: 4px; /* Reducido para juntar el título con el subtítulo */
+        }
+
+        & .header_title {
+             line-height: 0.9; /* Juntamos más las líneas en móvil */
+        }
+
+        & .title_br {
+            display: none;
+        }
+
+        & .title_br_mobile {
+            display: block;
         }
 
         & .title_accent {
-            margin-inline: auto;
-            transform-origin: center;
+            display: block;
+            font-size: calc(var(--h1-size) * 1.8); /* Amarillo más grande */
+            margin-top: calc(var(--h1-size) * -0.4); /* Más pegado al texto superior */
+            margin-bottom: calc(var(--h1-size) * -0.2); 
         }
 
         & .left_buttons_container {
             justify-content: center;
+            flex-direction: column;
+            width: 100%;
+            margin-top: 5px; /* Reducido */
         }
 
         & .header_right_container {
             order: -1;
             flex: 0 0 auto;
+            margin-bottom: 10px; /* Reducido para alejarlo del nav */
+            margin-top: 60px; /* Añadido espacio superior para que no lo corte el nav */
 
             & img {
-                width: 160px;
+                width: 130px; /* Logo un poco más chico para dar espacio */
             }
         }
 
@@ -337,22 +298,18 @@
             display: none;
         }
     }
+}
 
-    /* Sin movimiento si el usuario lo pide */
-    @media (prefers-reduced-motion: reduce) {
-        &::before,
-        &::after,
-        & .reveal,
-        & .mouse_button_container,
-        & .mouse_wheel {
-            animation: none;
-        }
-
-        & .title_line,
-        & .title_accent,
-        & .header_right_container img {
-            transition: none;
-        }
+@media (prefers-reduced-motion: reduce) {
+    .header_container::before,
+    .header_container::after,
+    .header_container .reveal,
+    .header_container .mouse_button_container,
+    .header_container .mouse_wheel {
+        animation: none;
+    }
+    .header_container .header_right_container img {
+        transition: none;
     }
 }
 
@@ -361,30 +318,17 @@
    ========================================================================== */
 
 @keyframes lucesBase {
-    from {
-        transform: translate3d(-2%, -1%, 0) scale(1);
-    }
-    to {
-        transform: translate3d(2%, 2%, 0) scale(1.04);
-    }
+    from { transform: translate3d(-2%, -1%, 0) scale(1); }
+    to { transform: translate3d(2%, 2%, 0) scale(1.04); }
 }
 
 @keyframes reflejoAmarillo {
-    0% {
-        transform: translate3d(8vw, 12vh, 0) scale(0.8);
-    }
-    35% {
-        transform: translate3d(42vw, 32vh, 0) scale(1.15);
-    }
-    70% {
-        transform: translate3d(76vw, 8vh, 0) scale(0.9);
-    }
-    100% {
-        transform: translate3d(58vw, 72vh, 0) scale(1.2);
-    }
+    0% { transform: translate3d(8vw, 12vh, 0) scale(0.8); }
+    35% { transform: translate3d(42vw, 32vh, 0) scale(1.15); }
+    70% { transform: translate3d(76vw, 8vh, 0) scale(0.9); }
+    100% { transform: translate3d(58vw, 72vh, 0) scale(1.2); }
 }
 
-/* Entrada de textos y botones */
 @keyframes subirSuave {
     from {
         opacity: 0;
@@ -397,23 +341,16 @@
 }
 
 @keyframes aparecer {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-/* Rueda del mouse bajando */
 @keyframes ruedaMouse {
     0% {
         opacity: 0;
         transform: translate3d(0, 0, 0);
     }
-    30% {
-        opacity: 1;
-    }
+    30% { opacity: 1; }
     100% {
         opacity: 0;
         transform: translate3d(0, 10px, 0);

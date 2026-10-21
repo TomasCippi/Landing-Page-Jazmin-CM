@@ -1,15 +1,4 @@
-/* ==========================================================================
-   BANNER DE NÚMEROS (#numeros)
-   Desktop: mide exactamente 30vh. Todo se escala con el alto de la pantalla
-   (clamp + vh) para que siempre entre.
-   Orden del bloque:
-   layout → fondo fijo → efecto hundido → distribución (grid areas)
-   → cards (liquid glass) → texto y botón → entrada (reveal)
-   → responsive → keyframes
-   ========================================================================== */
-
-   .stats_banner_section {
-    /* ---------- Layout ---------- */
+.stats_banner_section {
     position: relative;
     z-index: 3;
     isolation: isolate;
@@ -17,69 +6,52 @@
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    height: 30vh;
-    height: 30svh;
+    min-height: 32vh;
+    min-height: 32svh;
+    padding-block: clamp(32px, 5vh, 56px);
     background: var(--color-oscuro, #102d30);
+    overflow: hidden;
 
-    /* Recorta el fondo fijo: solo se ve dentro del banner (efecto ventana) */
-    clip-path: inset(0);
-
-    /* ---------- Fondo fijo ----------
-       position: fixed = no se mueve al scrollear. El banner es la ventana
-       por donde se ve, así que cada scroll muestra otra parte del fondo. */
-    & .ocean_bg_fixed {
-        position: fixed;
+    & .stats_static_bg {
+        position: absolute;
         inset: 0;
         z-index: 0;
         pointer-events: none;
         background:
-            radial-gradient(circle at 18% 28%, rgb(92 185 189 / 0.35), transparent 45%),
-            radial-gradient(circle at 82% 68%, rgb(44 150 154 / 0.4), transparent 50%),
-            radial-gradient(circle at 60% 18%, rgb(250 236 127 / 0.08), transparent 30%),
+            radial-gradient(circle at 18% 28%, rgb(92 185 189 / 0.32), transparent 50%),
+            radial-gradient(circle at 82% 68%, rgb(44 150 154 / 0.38), transparent 55%),
+            radial-gradient(circle at 60% 18%, rgb(250 236 127 / 0.08), transparent 35%),
             linear-gradient(180deg, #0d2a2d 0%, #14464a 100%);
-
-        & .ocean_svg {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-        }
     }
 
-    /* Olas: tres capas con distinta velocidad y transparencia
-       (un poco más visibles para que se note a través del vidrio) */
-    & .wave_line {
+    & .stats_static_svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        transform: none;
+        animation: none;
+    }
+
+    & .stats_static_wave {
         fill: var(--color-secundario, #5cb9bd);
-        animation: wave_drift 16s ease-in-out infinite alternate;
+        transform: none;
+        animation: none;
 
-        &.wave_1 {
-            opacity: 0.12;
+        &.stats_wave_1 {
+            opacity: 0.11;
         }
 
-        &.wave_2 {
-            opacity: 0.17;
-            animation-duration: 20s;
-            animation-direction: alternate-reverse;
+        &.stats_wave_2 {
+            opacity: 0.16;
         }
 
-        &.wave_3 {
+        &.stats_wave_3 {
             opacity: 0.22;
-            animation-duration: 24s;
         }
     }
 
-    /* Fuera de pantalla: se pausan todas las animaciones (la clase la pone main.js) */
-    &.is-paused {
-        & .wave_line,
-        & .stats_eyebrow::before,
-        & .stats_cta_arrow::after {
-            animation-play-state: paused;
-        }
-    }
-
-    /* ---------- Efecto hundido ----------
-       Sombras internas arriba y abajo, en una capa por encima del fondo
-       (si fueran del propio banner, el fondo las taparía). */
     &::after {
         content: "";
         position: absolute;
@@ -92,40 +64,25 @@
             inset 0 0 60px rgb(0 0 0 / 0.25);
     }
 
-    /* ---------- Distribución ----------
-       Se define con grid-template-areas: para mover los bloques solo hay que
-       cambiar el orden de los nombres.
-       "stats" = las 3 cards, "intro" = texto + botón.
-       Desktop: cards a la izquierda, texto a la derecha. */
     & .reviews_content_wrapper {
         position: relative;
         z-index: 2;
-        flex: 1;
-        min-height: 0;
         display: grid;
-        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
         grid-template-areas: "stats intro";
         align-items: center;
-        gap: clamp(24px, 5vw, 64px);
-        width: min(92%, 1100px);
+        gap: clamp(28px, 5vw, 64px);
+        width: min(90%, 1140px);
         margin-inline: auto;
-        padding-block: clamp(10px, 2.4vh, 28px);
     }
 
     & .stats_grid {
         grid-area: stats;
-    }
-
-    & .stats_intro {
-        grid-area: intro;
-    }
-
-    /* ---------- Cards de cada número (liquid glass) ---------- */
-    & .stats_grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: clamp(10px, 1.4vw, 18px);
+        gap: clamp(12px, 1.5vw, 20px);
         padding: 0;
+        margin: 0;
         list-style: none;
     }
 
@@ -139,74 +96,63 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: clamp(6px, 1.4vh, 12px);
+        justify-content: space-between;
+        gap: 14px;
         width: 100%;
-        padding: clamp(10px, 2vh, 18px) clamp(12px, 1.4vw, 18px);
-        border-radius: 20px;
-        border: 1px solid rgb(255 255 255 / 0.22);
-
-        /* Reflejo en diagonal (capa 1) + vidrio casi transparente (color base) */
+        padding: clamp(16px, 2.2vh, 24px) clamp(16px, 1.6vw, 22px);
+        border-radius: 22px;
+        border: 1px solid rgb(255 255 255 / 0.2);
         background:
             linear-gradient(
-                115deg,
-                rgb(255 255 255 / 0.2) 0%,
-                rgb(255 255 255 / 0.05) 30%,
-                rgb(255 255 255 / 0) 55%
-            ) 0 0 / 220% 100% no-repeat,
-            rgb(255 255 255 / 0.035);
-
-        /* Desenfoca y satura lo que hay detrás: se ve el fondo, pero difuminado */
-        -webkit-backdrop-filter: blur(20px) saturate(180%);
-        backdrop-filter: blur(20px) saturate(180%);
-
-        /* Luz interna en los bordes + sombra suave */
+                135deg,
+                rgb(255 255 255 / 0.16) 0%,
+                rgb(92 185 189 / 0.12) 50%,
+                rgb(44 150 154 / 0.18) 100%
+            );
+        -webkit-backdrop-filter: blur(20px) saturate(160%);
+        backdrop-filter: blur(20px) saturate(160%);
         box-shadow:
-            inset 0 1px 1px rgb(255 255 255 / 0.5),
-            inset 0 -1px 1px rgb(255 255 255 / 0.12),
-            inset 1px 0 1px rgb(255 255 255 / 0.15),
-            0 8px 24px rgb(0 0 0 / 0.16);
+            inset 0 1px 1px rgb(255 255 255 / 0.42),
+            inset 0 -1px 1px rgb(255 255 255 / 0.1),
+            0 12px 28px rgb(0 0 0 / 0.2);
         transition:
-            translate 0.5s var(--ease-spring),
-            background-position 0.8s var(--ease-out),
-            box-shadow 0.4s ease;
+            transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+            border-color 0.35s ease,
+            box-shadow 0.35s ease;
 
-        /* Brillo curvo en la esquina superior izquierda */
         &::before {
             content: "";
             position: absolute;
             inset: 0;
             z-index: -1;
             border-radius: inherit;
-            background: radial-gradient(120% 90% at 0% 0%, rgb(255 255 255 / 0.16), transparent 55%);
+            background: radial-gradient(120% 90% at 0% 0%, rgb(255 255 255 / 0.18), transparent 55%);
             pointer-events: none;
         }
 
-        /* Hover (mouse): sube un poco y el reflejo se desliza */
         @media (hover: hover) {
             &:hover {
-                translate: 0 -3px;
-                background-position: 100% 0;
+                transform: translateY(-4px);
+                border-color: rgb(250 236 127 / 0.45);
                 box-shadow:
-                    inset 0 1px 1px rgb(255 255 255 / 0.65),
-                    inset 0 -1px 1px rgb(255 255 255 / 0.18),
-                    inset 1px 0 1px rgb(255 255 255 / 0.22),
-                    0 12px 30px rgb(0 0 0 / 0.22);
+                    inset 0 1px 1px rgb(255 255 255 / 0.6),
+                    0 16px 34px rgb(0 0 0 / 0.28);
             }
         }
 
-        /* Ícono redondo */
         & .stat_icon {
             flex: none;
             display: grid;
             place-items: center;
-            width: clamp(30px, 4.6vh, 42px);
-            height: clamp(30px, 4.6vh, 42px);
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             color: var(--color-base, #f1e5d5);
             background: linear-gradient(145deg, var(--color-principal, #2c969a), var(--color-secundario, #5cb9bd));
+            border: 1px solid rgb(255 255 255 / 0.3);
             box-shadow:
-                inset 0 1px 1px rgb(255 255 255 / 0.4),
-                0 4px 10px rgb(0 0 0 / 0.25);
+                inset 0 1px 1px rgb(255 255 255 / 0.45),
+                0 4px 12px rgb(0 0 0 / 0.22);
 
             & svg {
                 width: 52%;
@@ -214,7 +160,6 @@
             }
         }
 
-        /* Número + texto */
         & .stat_text {
             display: flex;
             flex-direction: column;
@@ -223,39 +168,38 @@
 
         & .stat_number {
             font-family: var(--fuente-titulo);
-            font-size: clamp(28px, 5vh, 44px);
+            font-size: clamp(30px, 3.4vw, 44px);
             line-height: 1;
             color: var(--color-acento, #faec7f);
-            text-shadow: 0 0 24px rgb(250 236 127 / 0.25);
+            text-shadow: 0 2px 18px rgb(250 236 127 / 0.22);
         }
 
         & .stat_label {
             font-family: var(--fuente-texto);
-            font-size: clamp(12px, 1vw, 13px);
+            font-size: clamp(12.5px, 1vw, 14px);
             font-weight: 500;
-            line-height: 1.25;
+            line-height: 1.3;
             color: var(--color-base, #f1e5d5);
-            opacity: 0.9;
+            opacity: 0.92;
         }
     }
 
-    /* ---------- Texto y botón (lado derecho) ---------- */
     & .stats_intro {
+        grid-area: intro;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: clamp(8px, 1.6vh, 16px);
+        gap: 14px;
     }
 
-    /* Etiqueta con puntito que late */
     & .stats_eyebrow {
         display: inline-flex;
         align-items: center;
         gap: 10px;
         padding: 6px 14px;
         border-radius: 999px;
-        border: 1px solid rgb(255 255 255 / 0.18);
-        background: rgb(255 255 255 / 0.06);
+        border: 1px solid rgb(255 255 255 / 0.2);
+        background: rgb(255 255 255 / 0.07);
         font-family: var(--fuente-texto);
         font-size: 11px;
         font-weight: 600;
@@ -274,9 +218,9 @@
 
     & .stats_title {
         font-family: var(--fuente-titulo);
-        font-size: clamp(24px, min(3vw, 5.4vh), 40px);
+        font-size: clamp(26px, 3.2vw, 42px);
         font-weight: 400;
-        line-height: 1.1;
+        line-height: 1.12;
         text-wrap: balance;
         color: var(--color-base, #f1e5d5);
 
@@ -289,17 +233,17 @@
     & .stats_description {
         max-width: 46ch;
         font-family: var(--fuente-texto);
-        font-size: clamp(13px, 1.9vh, 15px);
+        font-size: clamp(13.5px, 1.15vw, 15.5px);
         line-height: 1.55;
         color: var(--color-base, #f1e5d5);
-        opacity: 0.8;
+        opacity: 0.85;
     }
 
     & .stats_action {
         display: flex;
+        margin-top: 4px;
     }
 
-    /* Botón: pastilla crema con círculo y flecha */
     & .stats_cta {
         display: inline-flex;
         align-items: center;
@@ -318,11 +262,10 @@
             0 8px 22px rgb(0 0 0 / 0.28);
         -webkit-tap-highlight-color: transparent;
         transition:
-            transform 0.45s var(--ease-spring),
+            transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
             box-shadow 0.3s ease,
             background-color 0.3s ease;
 
-        /* Círculo con la flecha */
         & .stats_cta_arrow {
             position: relative;
             display: grid;
@@ -338,10 +281,9 @@
             & svg {
                 width: 16px;
                 height: 16px;
-                transition: transform 0.45s var(--ease-spring);
+                transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
             }
 
-            /* Aro que late alrededor del círculo */
             &::after {
                 content: "";
                 position: absolute;
@@ -353,7 +295,6 @@
             }
         }
 
-        /* Hover: se pone amarilla y la flecha baja (solo dispositivos con mouse) */
         @media (hover: hover) {
             &:hover {
                 transform: scale(1.04) translateY(-2px);
@@ -372,21 +313,17 @@
             }
         }
 
-        /* Press: se achica rápido */
         &:active {
             transform: scale(0.96);
             transition-duration: 0.12s;
         }
 
-        /* Accesibilidad con teclado */
         &:focus-visible {
             outline: 2px solid var(--color-acento, #faec7f);
             outline-offset: 3px;
         }
     }
 
-    /* ---------- Entrada (la clase is_visible la pone el script del componente) ----------
-       Cada elemento sube y aparece de a uno (--i define el orden). */
     & .stats_reveal {
         opacity: 0;
         transform: translate3d(0, 16px, 0);
@@ -401,81 +338,102 @@
         transition-delay: calc(var(--i, 0) * 110ms + 60ms);
     }
 
-    /* ---------- Responsive ---------- */
-
-    /* Desktop de poco alto: para que todo entre en 30vh se oculta primero
-       la etiqueta y después la bajada */
-    @media (min-width: 1001px) and (max-height: 900px) {
-        & .stats_eyebrow {
-            display: none;
-        }
-    }
-
-    @media (min-width: 1001px) and (max-height: 700px) {
-        & .stats_description {
-            display: none;
-        }
-    }
-
-    /* Tablets y celulares: los bloques se apilan, así que la altura es automática.
-       Texto arriba y cards abajo (para invertirlo, cambiá el orden: "stats" "intro") */
-    @media (max-width: 1000px) {
+    /* Tablets (hasta 1024px): texto arriba centrado y las 3 tarjetas en fila abajo */
+    @media (max-width: 1024px) {
         height: auto;
+        padding-block: 48px;
 
         & .reviews_content_wrapper {
-            flex: none;
             grid-template-columns: minmax(0, 1fr);
             grid-template-areas:
                 "intro"
                 "stats";
-            gap: 28px;
-            padding-block: 52px;
+            gap: 32px;
+            width: min(92%, 760px);
         }
 
         & .stats_intro {
             align-items: center;
             text-align: center;
         }
+
+        & .stats_grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        & .stat_card {
+            align-items: center;
+            text-align: center;
+            padding: 20px 14px;
+        }
+
+        & .stat_text {
+            align-items: center;
+        }
     }
 
-    /* Celulares: una card por renglón, con el ícono al costado */
-    @media (max-width: 860px) {
+    /* Celulares (hasta 680px): diseño refinado de tarjetas tipo pastilla horizontal */
+    @media (max-width: 680px) {
+        padding-block: 44px;
+
+        & .reviews_content_wrapper {
+            width: calc(100% - 36px);
+            gap: 26px;
+        }
+
+        & .stats_intro {
+            gap: 12px;
+        }
+
+        & .stats_title {
+            font-size: clamp(26px, 7.5vw, 34px);
+        }
+
+        & .stats_description {
+            font-size: 14px;
+            line-height: 1.5;
+            max-width: 36ch;
+        }
+
         & .stats_grid {
             grid-template-columns: minmax(0, 1fr);
-            gap: 14px;
+            gap: 12px;
+            width: 100%;
+            max-width: 400px;
+            margin-inline: auto;
         }
 
         & .stat_card {
             flex-direction: row;
             align-items: center;
-            justify-content: center;
-            gap: 16px;
-            padding: 14px 20px;
+            justify-content: flex-start;
+            text-align: left;
+            gap: 18px;
+            padding: 16px 22px;
+            border-radius: 20px;
         }
 
         & .stat_icon {
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
+        }
+
+        & .stat_text {
+            align-items: flex-start;
+            gap: 2px;
+        }
+
+        & .stat_number {
+            font-size: 32px;
+        }
+
+        & .stat_label {
+            font-size: 13.5px;
         }
     }
 }
 
-/* ==========================================================================
-   KEYFRAMES DEL BANNER
-   (los @keyframes no se pueden anidar, por eso van sueltos al final)
-   ========================================================================== */
-
-/* Las olas se desplazan despacio de un lado al otro */
-@keyframes wave_drift {
-    0% {
-        transform: translateX(-3%);
-    }
-    100% {
-        transform: translateX(3%);
-    }
-}
-
-/* Puntito de la etiqueta: late */
 @keyframes dot_pulse {
     0%,
     100% {
@@ -488,7 +446,6 @@
     }
 }
 
-/* Aro del botón: se expande y se desvanece */
 @keyframes cta_ping {
     0% {
         opacity: 0.6;

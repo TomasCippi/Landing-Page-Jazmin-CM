@@ -4,7 +4,6 @@ import jazminImg from "../assets/jazmin.webp";
 import "../styles/about.css";
 import Boton from "./Buttons.astro";
 
-// Chips: íconos SVG inline (cero peticiones externas)
 const chips = [
     {
         label: "Estrategia",
@@ -22,12 +21,9 @@ const chips = [
 ---
 
 <section class="about_container" id="sobre-mi" data-nav-theme="light">
-    <!-- ======================================================================
-         OLAS DE FONDO (Optimizado para GPU)
-         ====================================================================== -->
-    <div class="about_waves" aria-hidden="true">
+    <div class="about_bg_waves" aria-hidden="true">
         <svg
-            class="about_waves_svg"
+            class="about_bg_waves_svg"
             viewBox="0 0 1440 900"
             preserveAspectRatio="xMidYMid slice"
             fill="none"
@@ -42,44 +38,36 @@ const chips = [
                 </linearGradient>
             </defs>
 
-            <!-- Ola principal: sube desde la izquierda y hace el rulo arriba a la derecha -->
-            <g class="wave" style="--i: 0">
-                <path class="soft" pathLength="1" d="M-60 700 C190 690 400 570 620 440 S1010 190 1230 160 C1350 144 1440 196 1408 262 C1386 306 1318 296 1322 250" />
-                <path class="core" pathLength="1" d="M-60 700 C190 690 400 570 620 440 S1010 190 1230 160 C1350 144 1440 196 1408 262 C1386 306 1318 296 1322 250" />
+            <g class="about_wave_group" style="--i: 0">
+                <path class="about_wave_soft" pathLength="1" d="M-60 700 C190 690 400 570 620 440 S1010 190 1230 160 C1350 144 1440 196 1408 262 C1386 306 1318 296 1322 250" />
+                <path class="about_wave_core" pathLength="1" d="M-60 700 C190 690 400 570 620 440 S1010 190 1230 160 C1350 144 1440 196 1408 262 C1386 306 1318 296 1322 250" />
             </g>
 
-            <!-- Ola del medio: pasa por debajo del texto -->
-            <g class="wave" style="--i: 1">
-                <path class="soft" pathLength="1" d="M-80 640 C160 710 420 700 650 600 S1000 430 1200 380" />
-                <path class="core" pathLength="1" d="M-80 640 C160 710 420 700 650 600 S1000 430 1200 380" />
+            <g class="about_wave_group" style="--i: 1">
+                <path class="about_wave_soft" pathLength="1" d="M-80 640 C160 710 420 700 650 600 S1000 430 1200 380" />
+                <path class="about_wave_core" pathLength="1" d="M-80 640 C160 710 420 700 650 600 S1000 430 1200 380" />
             </g>
 
-            <!-- Rulo inferior central -->
-            <g class="wave" style="--i: 2">
-                <path class="core" pathLength="1" d="M430 880 C560 770 700 720 810 720 C890 720 920 790 872 822 C832 848 790 812 822 780" />
+            <g class="about_wave_group" style="--i: 2">
+                <path class="about_wave_core" pathLength="1" d="M430 880 C560 770 700 720 810 720 C890 720 920 790 872 822 C832 848 790 812 822 780" />
             </g>
 
-            <!-- Líneas suaves de apoyo abajo a la izquierda -->
-            <g class="wave" style="--i: 3">
-                <path class="core" pathLength="1" d="M-100 780 C140 760 380 810 600 770" />
+            <g class="about_wave_group" style="--i: 3">
+                <path class="about_wave_core" pathLength="1" d="M-100 780 C140 760 380 810 600 770" />
             </g>
 
-            <g class="wave" style="--i: 4">
-                <path class="thin" pathLength="1" d="M-100 850 C160 830 420 880 700 840" />
+            <g class="about_wave_group" style="--i: 4">
+                <path class="about_wave_thin" pathLength="1" d="M-100 850 C160 830 420 880 700 840" />
             </g>
 
-            <!-- Barrido derecho detrás de la foto -->
-            <g class="wave" style="--i: 5">
-                <path class="soft" pathLength="1" d="M1540 560 C1420 610 1280 650 1120 730" />
-                <path class="core" pathLength="1" d="M1540 560 C1420 610 1280 650 1120 730" />
+            <g class="about_wave_group" style="--i: 5">
+                <path class="about_wave_soft" pathLength="1" d="M1540 560 C1420 610 1280 650 1120 730" />
+                <path class="about_wave_core" pathLength="1" d="M1540 560 C1420 610 1280 650 1120 730" />
             </g>
         </svg>
     </div>
 
     <div class="about_content">
-        <!-- ==================================================================
-             COLUMNA IZQUIERDA: texto
-             ================================================================== -->
         <div class="about_left">
             <span class="about_dash about_item" style="--i: 0" aria-hidden="true"></span>
 
@@ -93,10 +81,9 @@ const chips = [
             </h2>
 
             <p class="about_text about_item" style="--i: 3">
-                Acompaño marcas que quieren comunicar con intención, conectar con su comunidad y crecer sin perder su esencia.
+                Soy Community Manager, Social Media y creadora de contenido. Hace 2 años acompaño a marcas en sus redes mientras estudio Marketing en UADE. Mi regla es simple: tu marca es tuya; escucho lo que necesitás y aporto mi mirada estratégica porque no publico por publicar: cada contenido tiene un objetivo claro para que tu negocio avance.
             </p>
 
-            <!-- Chips con íconos -->
             <div class="about_chips">
                 {
                     chips.map((chip, index) => (
@@ -115,9 +102,6 @@ const chips = [
             </div>
         </div>
 
-        <!-- ==================================================================
-             COLUMNA DERECHA: foto estática con componente Image de Astro
-             ================================================================== -->
         <div class="about_right">
             <Image
                 class="about_person_img"

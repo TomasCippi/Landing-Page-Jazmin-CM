@@ -1,40 +1,30 @@
-/* ==========================================================================
-   SERVICES (Gestión de Redes + Proyectos Puntuales)
-   - Título grande idéntico a About ("HOLA, SOY LUZ")
-   - Cards con CSS Grid Stacking: cero overflow, altura natural exacta
-   - Animaciones en scroll aceleradas por GPU (transform + opacity)
-   ========================================================================== */
+/* src/styles/servicios.css */
 
-   .services_section {
+.services_section {
     --srv-ink: #1f6f74;
     --srv-ink-dark: #0b3a3e;
     --srv-title-size: clamp(38px, min(5vw, 9vh), 82px);
-    --srv-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --srv-spring: cubic-bezier(0.16, 1, 0.3, 1); /* Curva suave y fluida tipo Apple */
     --srv-out: cubic-bezier(0.16, 1, 0.3, 1);
 
     position: relative;
     z-index: 4;
     isolation: isolate;
     width: 100%;
+    overflow: hidden;
     min-height: 100vh;
     padding: clamp(96px, 12vh, 130px) 0 clamp(80px, 10vh, 110px);
     background-color: var(--color-base, #f1e5d5);
     color: var(--srv-ink-dark);
     box-shadow: 0 -24px 48px rgb(0 0 0 / 0.22);
 
-    /* Contenedor alineado al 80% como el Nav y el About */
     & .services_container {
-        width: 80%;
-        max-width: 1400px;
+        width: min(85%, 1340px);
         margin-inline: auto;
         display: flex;
         flex-direction: column;
         gap: clamp(48px, 6.5vh, 72px);
     }
-
-    /* ======================================================================
-       1. CABECERA PRINCIPAL (Igual a "HOLA, SOY LUZ" en About)
-       ====================================================================== */
 
     & .services_header {
         display: flex;
@@ -101,7 +91,6 @@
         line-height: 1.1;
         color: var(--srv-ink);
 
-        /* Marcador amarillo luz detrás de la cursiva */
         &::before {
             content: "";
             position: absolute;
@@ -130,10 +119,6 @@
         animation: srvEscribir 1.2s cubic-bezier(0.65, 0, 0.35, 1) 0.5s forwards;
     }
 
-    /* ======================================================================
-       2. SUBTÍTULOS DE CADA GRUPO Y GRILLAS
-       ====================================================================== */
-
     & .services_group {
         display: flex;
         flex-direction: column;
@@ -148,7 +133,7 @@
 
     & .group_title {
         font-family: var(--fuente-titulo);
-        font-size: clamp(24px, 2.6vw, 34px);
+        font-size: clamp(22px, 2.5vw, 32px);
         font-weight: 400;
         letter-spacing: 1px;
         color: var(--srv-ink-dark);
@@ -180,25 +165,21 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    /* ======================================================================
-       3. CARDS CON FLIP 3D SIN OVERFLOW (Grid Stacking)
-       Ambas caras viven en grid-area: 1 / 1, por lo que la tarjeta siempre
-       toma la altura real de su contenido sin recortar nada.
-       ====================================================================== */
-
     & .service_card {
         perspective: 1400px;
         display: flex;
     }
 
+    /* TRANSICIÓN SUAVE DE LA CARTA */
     & .card_inner {
         position: relative;
         width: 100%;
         display: grid;
         grid-template-columns: 100%;
         transform-style: preserve-3d;
-        transition: transform 0.7s cubic-bezier(0.34, 1.4, 0.64, 1);
-        will-change: transform;
+        /* Duración optimizada y curva de transición suave (cero efecto brusco) */
+        transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform, height;
     }
 
     & .service_card.is_flipped .card_inner {
@@ -212,15 +193,17 @@
         backface-visibility: hidden;
         -webkit-backface-visibility: hidden;
         border-radius: 24px;
-        padding: clamp(24px, 2.4vw, 30px);
+        padding: clamp(24px, 2.4vw, 32px);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        gap: 18px;
+        gap: 20px;
+        /* Transición difuminada de opacidad para acompañar el giro */
         transition:
-            transform 0.35s var(--srv-out),
-            box-shadow 0.35s ease,
-            border-color 0.35s ease;
+            transform 0.5s ease,
+            box-shadow 0.4s ease,
+            border-color 0.4s ease,
+            opacity 0.4s ease;
     }
 
     & .card_back {
@@ -228,10 +211,6 @@
         justify-content: flex-start;
         gap: 14px;
     }
-
-    /* ======================================================================
-       4. ESTILOS DE GRUPO 1: GESTIÓN DE REDES (Blanco Cálido / Verde Petróleo)
-       ====================================================================== */
 
     & .service_card--primary .card_front {
         background: #ffffff;
@@ -257,10 +236,6 @@
         border: 1.5px solid rgb(255 255 255 / 0.25);
         box-shadow: 0 20px 42px rgb(16 45 48 / 0.24);
     }
-
-    /* ======================================================================
-       5. ESTILOS DE GRUPO 2: PROYECTOS PUNTUALES (Oscuro Marino / Turquesa)
-       ====================================================================== */
 
     & .service_card--secondary .card_front {
         background: linear-gradient(145deg, #102d30 0%, #174044 100%);
@@ -288,10 +263,6 @@
         box-shadow: 0 20px 42px rgb(16 45 48 / 0.16);
     }
 
-    /* ======================================================================
-       6. ELEMENTOS DEL FRENTE (Proporciones grandes, cero espacio muerto)
-       ====================================================================== */
-
     & .card_top {
         display: flex;
         align-items: center;
@@ -303,7 +274,7 @@
         font-size: 22px;
         line-height: 1;
         color: var(--color-principal, #2c969a);
-        opacity: 0.7;
+        opacity: 0.75;
     }
 
     & .service_card--secondary .card_num {
@@ -361,14 +332,14 @@
     & .card_subtitle {
         font-family: var(--fuente-script);
         font-size: clamp(24px, 2vw, 28px);
-        line-height: 1;
+        line-height: 1.05;
         color: var(--color-acento, #faec7f);
         margin-top: -2px;
     }
 
     & .card_phrase {
         font-family: var(--fuente-texto);
-        font-size: clamp(15.5px, 1.15vw, 17.5px);
+        font-size: clamp(15px, 1.15vw, 17px);
         line-height: 1.55;
         color: var(--srv-ink-dark);
         font-weight: 400;
@@ -378,7 +349,6 @@
         color: rgb(241 229 213 / 0.92);
     }
 
-    /* Botón para girar la card */
     & .card_flip_btn {
         align-self: flex-start;
         display: inline-flex;
@@ -432,10 +402,6 @@
         }
     }
 
-    /* ======================================================================
-       7. ELEMENTOS DEL DORSO (Todo visible sin scroll interno)
-       ====================================================================== */
-
     & .card_back_top {
         display: flex;
         align-items: center;
@@ -455,7 +421,7 @@
     }
 
     & .card_close_btn {
-        padding: 5px 14px;
+        padding: 6px 14px;
         border-radius: 999px;
         border: 1px solid rgb(255 255 255 / 0.32);
         background: rgb(255 255 255 / 0.14);
@@ -557,20 +523,17 @@
         font-size: 12px;
         font-weight: 500;
         color: #ffffff;
-        
-        /* Animación suave para el hover */
         transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), 
                     background-color 0.25s ease, 
                     border-color 0.25s ease;
         will-change: transform;
     }
 
-    /* Pequeño efecto de resorte/escala y brillo al pasar el cursor */
     @media (hover: hover) {
         & .ideal_pill:hover {
             transform: translateY(-2px) scale(1.05);
             background: rgb(255 255 255 / 0.28);
-            border-color: rgba(250, 236, 127, 0.6); /* Destello sutil con el amarillo luz de marca */
+            border-color: rgba(250, 236, 127, 0.6);
         }
     }
 
@@ -592,13 +555,10 @@
         text-align: center;
         font-size: 15px;
         font-weight: 500;
+        line-height: 1.5;
         color: var(--srv-ink-dark);
         margin-top: 4px;
     }
-
-    /* ======================================================================
-       8. BANNER DE COTIZACIÓN INFERIOR
-       ====================================================================== */
 
     & .quote_banner {
         display: flex;
@@ -632,6 +592,7 @@
             font-size: 1.28em;
             color: var(--color-acento, #faec7f);
             margin-left: 4px;
+            display: inline-block;
         }
     }
 
@@ -648,10 +609,6 @@
         box-shadow: 0 8px 22px rgb(0 0 0 / 0.16);
     }
 
-    /* ======================================================================
-       9. ANIMACIONES EN SCROLL (GPU: solo opacity + transform3d)
-       ====================================================================== */
-
     & [data-srv-reveal] {
         opacity: 0;
         transform: translate3d(0, 28px, 0);
@@ -666,10 +623,6 @@
         transform: translate3d(0, 0, 0);
     }
 
-    /* ======================================================================
-       10. RESPONSIVE Y ACCESIBILIDAD
-       ====================================================================== */
-
     @media (max-width: 1120px) {
         & .services_container {
             width: 90%;
@@ -678,11 +631,21 @@
         & .cards_grid--three {
             grid-template-columns: repeat(2, minmax(0, 1fr));
         }
+
+        & .cards_grid--three > .service_card:last-child {
+            grid-column: 1 / -1;
+            max-width: 520px;
+            width: 100%;
+            margin-inline: auto;
+        }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 820px) {
+        padding: 88px 0 64px;
+
         & .services_container {
-            width: calc(100% - 40px);
+            width: calc(100% - 36px);
+            gap: 40px;
         }
 
         & .services_header {
@@ -694,15 +657,108 @@
             align-items: center;
         }
 
+        & .services_group {
+            gap: 18px;
+        }
+
+        & .group_header {
+            gap: 14px;
+        }
+
+        & .group_title {
+            font-size: clamp(20px, 5.5vw, 26px);
+        }
+
         & .cards_grid--three,
         & .cards_grid--two {
-            grid-template-columns: 1fr;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 18px;
+        }
+
+        & .cards_grid--three > .service_card:last-child {
+            max-width: 100%;
+        }
+
+        & .card_face {
+            padding: 24px 22px;
+            border-radius: 22px;
+        }
+
+        & .service_card:not(.is_flipped) .card_back {
+            height: 0;
+            padding-block: 0;
+            border-width: 0;
+            overflow: hidden;
+        }
+
+        & .service_card.is_flipped .card_front {
+            height: 0;
+            padding-block: 0;
+            border-width: 0;
+            overflow: hidden;
+        }
+
+        & .card_front {
+            gap: 20px;
+            justify-content: flex-start;
+        }
+
+        & .card_body {
+            margin-block: 0;
+            gap: 8px;
+        }
+
+        & .card_title {
+            font-size: clamp(24px, 6.2vw, 28px);
+        }
+
+        & .card_subtitle {
+            font-size: clamp(22px, 5.5vw, 26px);
+        }
+
+        & .card_phrase {
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        & .card_flip_btn {
+            margin-top: 4px;
+            padding: 10px 18px;
+            font-size: 13.5px;
+        }
+
+        & .services_note {
+            font-size: 14.5px;
+            padding-inline: 8px;
         }
 
         & .quote_banner {
             flex-direction: column;
             text-align: center;
             align-items: center;
+            gap: 22px;
+            padding: 28px 22px;
+            border-radius: 24px;
+        }
+
+        & .quote_title {
+            font-size: clamp(24px, 6.5vw, 30px);
+
+            & span {
+                display: block;
+                margin-left: 0;
+                margin-top: 2px;
+            }
+        }
+
+        & .quote_desc {
+            font-size: 14.5px;
+        }
+
+        & .quote_banner_action {
+            width: 100%;
+            display: flex;
+            justify-content: center;
         }
     }
 
@@ -734,10 +790,6 @@
         }
     }
 }
-
-/* ==========================================================================
-   KEYFRAMES (Idénticos a About para coherencia visual)
-   ========================================================================== */
 
 @keyframes srvSubirTexto {
     from {

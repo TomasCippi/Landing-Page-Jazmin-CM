@@ -1,12 +1,10 @@
 ---
-/* src/components/Nav.astro */
 import '../styles/nav.css';
 import Boton from './Buttons.astro';
 ---
 
 <div class="nav_wrapper">
   <nav class="nav_container" aria-label="Navegación principal">
-    <!-- Logo -->
     <a href="#inicio" class="nav_logo" aria-label="Ir al inicio">
       <img 
         src="/logo.svg" 
@@ -17,10 +15,8 @@ import Boton from './Buttons.astro';
       />
     </a>
 
-    <!-- Enlaces conectados a las próximas secciones -->
     <ul class="nav_links_container" id="nav-menu">
       <div class="nav_water_drop" id="water-drop"></div>
-
       <li><a href="#inicio" class="nav_link active">Inicio</a></li>
       <li><a href="#sobre-mi" class="nav_link">Sobre Mí</a></li>
       <li><a href="#servicios" class="nav_link">Mis servicios</a></li>
@@ -29,11 +25,30 @@ import Boton from './Buttons.astro';
       <li><a href="#faq" class="nav_link">Preguntas frecuentes</a></li>
     </ul>
 
-    <!-- Botón de contacto rápido -->
     <div class="nav_action">
       <Boton texto="Hablemos" href="#contacto" variante="primaria" />
     </div>
+
+    <button class="nav_hamburger" id="hamburger-btn" aria-label="Abrir menú" aria-expanded="false">
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+    </button>
   </nav>
+
+  <div class="nav_mobile_menu" id="mobile-menu" aria-hidden="true">
+    <ul class="mobile_links_list">
+      <li><a href="#inicio" class="mobile_link">Inicio</a></li>
+      <li><a href="#sobre-mi" class="mobile_link">Sobre Mí</a></li>
+      <li><a href="#servicios" class="mobile_link">Mis servicios</a></li>
+      <li><a href="#como-trabajo" class="mobile_link">Cómo trabajo</a></li>
+      <li><a href="#resenas" class="mobile_link">Reseñas</a></li>
+      <li><a href="#faq" class="mobile_link">Preguntas frecuentes</a></li>
+    </ul>
+    <div class="mobile_action">
+      <Boton texto="Hablemos por WhatsApp" href="#contacto" variante="primaria" />
+    </div>
+  </div>
 </div>
 
 <script>
@@ -41,6 +56,9 @@ import Boton from './Buttons.astro';
     const navMenu = document.getElementById('nav-menu');
     const drop = document.getElementById('water-drop');
     const links = document.querySelectorAll<HTMLAnchorElement>('.nav_link');
+    const hamburger = document.getElementById('hamburger-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll<HTMLAnchorElement>('.mobile_link');
 
     if (!navMenu || !drop || links.length === 0) return;
 
@@ -61,7 +79,7 @@ import Boton from './Buttons.astro';
 
     function initActive() {
       const activeLink = document.querySelector<HTMLAnchorElement>('.nav_link.active');
-      if (activeLink) {
+      if (activeLink && window.innerWidth > 860) {
         updateDropPosition(activeLink);
       }
     }
@@ -86,6 +104,32 @@ import Boton from './Buttons.astro';
       });
     });
 
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.toggle('is_open');
+        hamburger.classList.toggle('is_active');
+        hamburger.setAttribute('aria-expanded', String(isOpen));
+        mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+      });
+
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          const targetId = link.getAttribute('href');
+          if (targetId && targetId.startsWith('#')) {
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+              e.preventDefault();
+              targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+          }
+          mobileMenu.classList.remove('is_open');
+          hamburger.classList.remove('is_active');
+          hamburger.setAttribute('aria-expanded', 'false');
+          mobileMenu.setAttribute('aria-hidden', 'true');
+        });
+      });
+    }
+
     const sections = document.querySelectorAll('section[id], header[id]');
     const observerOptions = {
       root: null,
@@ -101,7 +145,9 @@ import Boton from './Buttons.astro';
             if (link.getAttribute('href') === `#${id}`) {
               links.forEach(l => l.classList.remove('active'));
               link.classList.add('active');
-              updateDropPosition(link);
+              if (window.innerWidth > 860) {
+                updateDropPosition(link);
+              }
             }
           });
         }

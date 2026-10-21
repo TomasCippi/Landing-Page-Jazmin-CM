@@ -6,25 +6,30 @@ import Boton from "./Buttons.astro";
 <header class="header_container" id="inicio">
     <div class="header_left_container">
         <div class="left_text_container">
-            <h1 class="header_title">
-                <span class="title_line reveal" style="--i: 0">CONTENIDO CON</span>
-                <span class="title_line title_accent reveal" style="--i: 1">identidad</span>
-                <span class="title_line reveal" style="--i: 2">QUE SE VEA LINDO.</span>
-                <span class="title_line reveal" style="--i: 3">QUE TENGA SENTIDO.</span>
+            <!-- Título secundario (Script) -->
+            <span class="header_subtitle reveal" style="--i: 0">Soy Jazmín Isabella</span>
+            
+            <!-- Título principal -->
+            <h1 class="header_title reveal" style="--i: 1">
+                Estrategia y creatividad <br class="title_br" />
+                para marcas que buscan <br class="title_br_mobile" />
+                <span class="title_accent">crecer.</span>
             </h1>
 
-            <p class="header_text reveal" style="--i: 4">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, veniam ipsam! Laborum hic voluptates accusantium facere eos fuga, dolorum sunt.
+            <!-- Párrafo -->
+            <p class="header_text reveal" style="--i: 2">
+                Community Manager y Social Media con mirada de marketing. Cuido tu marca en redes como si fuera mía, sin perder tu esencia.
             </p>
         </div>
 
-        <div class="left_buttons_container reveal" style="--i: 5">
+        <div class="left_buttons_container reveal" style="--i: 3">
             <Boton texto="VER MIS SERVICIOS" href="#servicios" variante="primaria" />
             <Boton texto="QUIERO TRABAJAR CON VOS" href="#contacto" variante="secundaria" />
         </div>
     </div>
 
-    <div class="header_right_container">
+    <!-- Logo Animado a la derecha -->
+    <div class="header_right_container reveal" style="--i: 4">
         <img
             src="/animations/logo_animado.svg"
             alt="Logo animado de Luzsaracommunity"
