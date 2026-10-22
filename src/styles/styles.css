@@ -2,9 +2,9 @@
    GLOBAL
    ========================================================================== */
 
-/* Título: The Youngest Serif (self-hosted: subir el archivo a public/fonts/) */
+/* Título: Cormorant Garamond (self-hosted: subir el archivo a public/fonts/) */
 @font-face {
-    font-family: "The Youngest Serif";
+    font-family: "Cormorant Garamond";
     src: url("/fonts/the-youngest-serif.woff2") format("woff2");
     font-weight: 400;
     font-style: normal;
@@ -20,7 +20,7 @@
     --color-oscuro: #102d30; /* Fondo oscuro */
 
     /* Tipografías */
-    --fuente-titulo: "The Youngest Serif", Georgia, serif;
+    --fuente-titulo: "Cormorant Garamond", Georgia, serif;
     --fuente-texto: "Poppins", system-ui, sans-serif;
     --fuente-script: "Great Vibes", cursive;
 

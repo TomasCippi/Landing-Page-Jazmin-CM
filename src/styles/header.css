@@ -89,7 +89,7 @@
     }
 
     & .header_title {
-        font-family: var(--fuente-titulo, 'The Youngest Serif', serif);
+        font-family: var(--fuente-titulo, 'Cormorant Garamond', serif);
         font-weight: 400;
         font-size: var(--h1-size);
         line-height: 0.9; /* Reducido para juntar las líneas blancas */

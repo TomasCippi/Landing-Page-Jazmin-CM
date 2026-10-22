@@ -1,0 +1,306 @@
+/* ==========================================================
+   Contacto — Luzsaracommunity
+   Sección crema (igual que FAQ y footer) con patrón de olas
+   + panel turquesa. Solo animo transform/opacity.
+   ========================================================== */
+
+   .contacto {
+    --c-deep: #0c3f45;
+    --c-teal-dark: #0f5a60;
+    --c-teal: #1b8a8e;
+    --c-aqua: #4fc3c4;
+    --c-cream: #f3e6d3;
+    --c-yellow: #f6d64a;
+    --c-ink: #0b3a40;
+  
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    isolation: isolate;
+    padding: clamp(4rem, 9vw, 7.5rem) clamp(1.25rem, 5vw, 4rem);
+    background: var(--c-cream);
+    content-visibility: auto;
+    contain-intrinsic-size: auto 640px;
+  }
+  
+  /* ---------- Patrón de olas (se desvanece arriba y abajo) ---------- */
+  .contacto__pattern {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='48' viewBox='0 0 120 48' fill='none' stroke='%231b8a8e' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M0 24c15-18 30-18 45 0s30 18 45 0 22-14 30-8' opacity='.45'/%3E%3Ccircle cx='60' cy='6' r='1.4' fill='%23f6d64a' stroke='none'/%3E%3C/svg%3E");
+    background-size: 120px 48px;
+    opacity: 0.55;
+    -webkit-mask-image: linear-gradient(transparent 0%, #000 22%, #000 78%, transparent 100%);
+    mask-image: linear-gradient(transparent 0%, #000 22%, #000 78%, transparent 100%);
+  }
+  
+  .contacto__spark {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: var(--c-yellow);
+    clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+    opacity: 0.8;
+    z-index: -1;
+    animation: contacto-twinkle 3.6s ease-in-out infinite;
+  }
+  .contacto__spark--1 { top: 14%; left: 7%; }
+  .contacto__spark--2 { bottom: 16%; right: 8%; width: 12px; height: 12px; animation-delay: 1.4s; background: var(--c-teal); }
+  
+  /* ---------- Panel turquesa ---------- */
+  .contacto__card {
+    --mx: 50%;
+    --my: 50%;
+    position: relative;
+    width: 100%;
+    max-width: 1040px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: clamp(2.5rem, 6vw, 4.75rem) clamp(1.25rem, 5vw, 4rem);
+    border-radius: clamp(24px, 3.2vw, 40px);
+    color: #fff;
+    background:
+      radial-gradient(90% 120% at 85% 0%, var(--c-teal) 0%, transparent 60%),
+      linear-gradient(160deg, var(--c-teal-dark) 0%, var(--c-deep) 100%);
+    box-shadow: 0 34px 70px -34px rgba(12, 63, 69, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    overflow: hidden;
+  }
+  
+  /* Brillo que sigue al cursor (solo desktop) */
+  .contacto__card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(420px circle at var(--mx) var(--my), rgba(255, 255, 255, 0.14), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .contacto__card.is-hover::before { opacity: 1; }
+  
+  /* Línea luminosa superior */
+  .contacto__card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 12%;
+    width: 76%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--c-yellow), transparent);
+  }
+  
+  /* ---------- Decoración interna futurista ---------- */
+  .contacto__deco {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .contacto__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 44px 44px;
+    -webkit-mask-image: radial-gradient(75% 75% at 50% 50%, #000 0%, transparent 100%);
+    mask-image: radial-gradient(75% 75% at 50% 50%, #000 0%, transparent 100%);
+  }
+  .contacto__ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    will-change: transform;
+  }
+  .contacto__ring--a {
+    width: clamp(220px, 38vw, 420px);
+    aspect-ratio: 1;
+    top: -22%;
+    left: -8%;
+    border-style: dashed;
+    animation: contacto-spin 60s linear infinite;
+  }
+  .contacto__ring--b {
+    width: clamp(160px, 28vw, 300px);
+    aspect-ratio: 1;
+    bottom: -26%;
+    right: -4%;
+    border-color: rgba(246, 214, 74, 0.28);
+    animation: contacto-spin 45s linear infinite reverse;
+  }
+  .contacto__mark {
+    position: absolute;
+    right: clamp(0.5rem, 4vw, 3rem);
+    bottom: -0.2em;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(9rem, 22vw, 18rem);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+    user-select: none;
+  }
+  
+  .contacto__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* ---------- Texto ---------- */
+  .contacto__title {
+    margin: 0;
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 6.2vw, 4.2rem);
+    line-height: 1.08;
+    color: #fff;
+  }
+  .contacto__title em {
+    display: block;
+    font-family: "Great Vibes", cursive;
+    font-style: normal;
+    font-size: 1.25em;
+    line-height: 1;
+    margin-top: 0.1em;
+    color: var(--c-yellow);
+  }
+  
+  .contacto__text {
+    max-width: 560px;
+    margin: 1.4rem 0 0;
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(0.92rem, 1.6vw, 1.08rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.84);
+  }
+  
+  /* ---------- Botón ---------- */
+  .contacto__actions {
+    display: flex;
+    justify-content: center;
+    margin: 2.2rem 0 0;
+    width: 100%;
+  }
+  .contacto__btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    min-height: 58px;
+    padding: 0 2.4rem;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.86rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--c-ink);
+    background: var(--c-yellow);
+    border-radius: 999px;
+    overflow: hidden;
+    box-shadow: 0 12px 32px -8px rgba(246, 214, 74, 0.55);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .contacto__btn svg { width: 22px; height: 22px; flex: none; }
+  .contacto__btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+    transform: skewX(-20deg);
+    animation: contacto-shine 4.5s ease-in-out infinite;
+  }
+  .contacto__btn:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+  }
+  
+  /* ---------- Chips ---------- */
+  .contacto__chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem 1.4rem;
+    margin: 2rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.72);
+  }
+  .contacto__chips li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .contacto__chips li::before {
+    content: "✦";
+    color: var(--c-yellow);
+    font-size: 0.7rem;
+  }
+  
+  /* ---------- Revelado al scroll ---------- */
+  .contacto.is-ready [data-reveal] {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: calc(var(--i, 0) * 90ms);
+  }
+  .contacto.is-ready.is-visible [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+  
+  /* Animaciones en pausa cuando no se ve la sección */
+  .contacto.is-ready:not(.is-visible) .contacto__ring,
+  .contacto.is-ready:not(.is-visible) .contacto__spark,
+  .contacto.is-ready:not(.is-visible) .contacto__btn::after {
+    animation-play-state: paused;
+  }
+  
+  @media (hover: hover) {
+    .contacto__btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 40px -8px rgba(246, 214, 74, 0.75);
+    }
+  }
+  
+  /* ---------- Mobile ---------- */
+  @media (max-width: 560px) {
+    .contacto__btn { width: 100%; padding: 0 1.2rem; }
+    .contacto__grid { background-size: 34px 34px; }
+    .contacto__spark--2 { display: none; }
+  }
+  
+  /* ---------- Keyframes ---------- */
+  @keyframes contacto-spin { to { transform: rotate(360deg); } }
+  @keyframes contacto-twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.7) rotate(0deg); }
+    50% { opacity: 0.95; transform: scale(1.1) rotate(45deg); }
+  }
+  @keyframes contacto-shine {
+    0%, 55% { transform: skewX(-20deg) translateX(0); }
+    100% { transform: skewX(-20deg) translateX(700%); }
+  }
+  
+  /* ---------- Accesibilidad ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    .contacto *,
+    .contacto *::before,
+    .contacto *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+    .contacto.is-ready [data-reveal] { opacity: 1; transform: none; }
+  }

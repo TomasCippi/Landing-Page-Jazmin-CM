@@ -1,0 +1,93 @@
+---
+// Contacto.astro — CTA entre el FAQ y el footer
+import "../styles/contact.css";
+
+const WHATSAPP_NUMBER = "5491134292032";
+const WHATSAPP_MSG = "¡Hola Jaz! Vi tu página y me gustaría trabajar con vos 💫";
+const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MSG)}`;
+---
+
+<section class="contacto" id="contacto" aria-labelledby="contacto-title">
+  <div class="contacto__pattern" aria-hidden="true"></div>
+  <span class="contacto__spark contacto__spark--1" aria-hidden="true"></span>
+  <span class="contacto__spark contacto__spark--2" aria-hidden="true"></span>
+
+  <div class="contacto__card" data-card>
+    <div class="contacto__deco" aria-hidden="true">
+      <div class="contacto__grid"></div>
+      <div class="contacto__ring contacto__ring--a"></div>
+      <div class="contacto__ring contacto__ring--b"></div>
+      <span class="contacto__mark">ls</span>
+    </div>
+
+    <div class="contacto__inner">
+      <h2 class="contacto__title" id="contacto-title" data-reveal style="--i:0">
+        ¿Te gustó mi trabajo?
+        <em>hablemos</em>
+      </h2>
+
+      <p class="contacto__text" data-reveal style="--i:1">
+        Contame qué necesita tu marca y armamos juntos una estrategia que tenga
+        sentido. Sin vueltas, sin compromiso.
+      </p>
+
+      <div class="contacto__actions" data-reveal style="--i:2">
+        <a class="contacto__btn" href={waHref} target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-1.6-.8-2.6-1.4-3.6-3.1-.1-.2 0-.4.1-.5l.4-.5.2-.4v-.4c0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.5 3.9 1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/>
+          </svg>
+          Hablemos por WhatsApp
+        </a>
+      </div>
+
+      <ul class="contacto__chips" data-reveal style="--i:3">
+        <li>Primera charla sin costo</li>
+        <li>Trabajo con marcas de todo el país</li>
+        <li>Propuesta a tu medida</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+  const section = document.querySelector<HTMLElement>(".contacto");
+
+  if (section) {
+    // 1) Revelado + pausa de animaciones fuera de pantalla
+    section.classList.add("is-ready");
+    const io = new IntersectionObserver(
+      ([entry]) => section.classList.toggle("is-visible", entry.isIntersecting),
+      { threshold: 0.15 }
+    );
+    io.observe(section);
+
+    // 2) Brillo que sigue al cursor (solo mouse real, throttled con rAF)
+    const card = section.querySelector<HTMLElement>("[data-card]");
+    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (card && canHover && !reduce) {
+      let raf = 0;
+      let x = 0;
+      let y = 0;
+
+      card.addEventListener(
+        "pointermove",
+        (e) => {
+          x = e.clientX;
+          y = e.clientY;
+          if (raf) return;
+          raf = requestAnimationFrame(() => {
+            const r = card.getBoundingClientRect();
+            card.style.setProperty("--mx", `${x - r.left}px`);
+            card.style.setProperty("--my", `${y - r.top}px`);
+            raf = 0;
+          });
+        },
+        { passive: true }
+      );
+      card.addEventListener("pointerenter", () => card.classList.add("is-hover"));
+      card.addEventListener("pointerleave", () => card.classList.remove("is-hover"));
+    }
+  }
+</script>

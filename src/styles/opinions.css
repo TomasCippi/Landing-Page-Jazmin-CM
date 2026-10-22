@@ -104,7 +104,7 @@
 }
 
 .opinions_title_top {
-    font-family: var(--fuente-titulo, 'The Youngest Serif', serif);
+    font-family: var(--fuente-titulo, 'Cormorant Garamond', serif);
     font-size: clamp(28px, min(4.5vw, 5vh), 52px);
     letter-spacing: 1.2px;
     color: var(--op-petroleo);
@@ -349,7 +349,7 @@
 }
 
 .opinions_cta_title {
-    font-family: var(--fuente-titulo, 'The Youngest Serif', serif);
+    font-family: var(--fuente-titulo, 'Cormorant Garamond', serif);
     font-size: clamp(17px, min(2.3vw, 2.8vh), 25px);
     font-weight: 400;
     line-height: 1.2;

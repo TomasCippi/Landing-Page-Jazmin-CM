@@ -5,7 +5,7 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   vite: {
     server: {
-      allowedHosts: ['sanctuary-humbling-chest.ngrok-free.dev'],
+      allowedHosts: ['c8e5-181-86-112-70.ngrok-free.app'],
     },
   },
 });
