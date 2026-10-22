@@ -60,8 +60,8 @@
         display: flex;
         justify-content: space-between;
         align-items: stretch;
-        gap: 40px;
-        width: min(85%, 1280px);
+        gap: 32px;
+        width: min(88%, 1340px);
         height: 100%;
         margin-inline: auto;
         padding-top: 84px;
@@ -73,9 +73,10 @@
         justify-content: center;
         align-items: flex-start;
         gap: clamp(12px, 2vh, 22px);
-        flex: 0 1 56%;
+        flex: 0 1 52%;
         min-width: 0;
         padding-bottom: 4vh;
+        z-index: 2;
     }
 
     & .about_item {
@@ -262,17 +263,14 @@
     }
 
     & .about_right {
-        position: absolute;
-        bottom: 0;
-        right: 2%;
+        position: relative;
         z-index: 1;
         isolation: isolate;
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
         align-items: flex-end;
-        height: 82vh;
-        width: auto;
-        max-width: 45vw;
+        flex: 0 1 48%;
+        height: 100%;
         opacity: 0;
         pointer-events: none;
         transform-origin: bottom center;
@@ -283,7 +281,7 @@
             bottom: -5%;
             left: 50%;
             z-index: -1;
-            width: 110%;
+            width: min(100%, 520px);
             aspect-ratio: 1;
             translate: -50% 0;
             border-radius: 50%;
@@ -304,35 +302,36 @@
     & .about_person_img {
         display: block;
         width: auto;
-        height: 100%;
+        height: auto;
+        max-height: min(82vh, 760px);
         max-width: 100%;
         object-fit: contain;
-        object-position: bottom right;
+        object-position: bottom center;
         pointer-events: none;
         user-select: none;
     }
 
-    /* Tablets horizontales y notebooks chicas */
     @media (max-width: 1180px) {
         --about-title: clamp(34px, 4.5vw, 56px);
 
         & .about_content {
             width: 92%;
-            gap: 24px;
+            gap: 20px;
         }
 
         & .about_left {
-            flex-basis: 58%;
+            flex-basis: 54%;
         }
 
         & .about_right {
-            height: 74vh;
-            max-width: 42vw;
-            right: 0;
+            flex-basis: 46%;
+        }
+
+        & .about_person_img {
+            max-height: 74vh;
         }
     }
 
-    /* Tablets verticales y celulares (100vh exactos y foto protagonista) */
     @media (max-width: 900px) {
         --about-title: clamp(30px, min(8.5vw, 5.5vh), 46px);
 
@@ -389,9 +388,6 @@
         }
 
         & .about_right {
-            position: relative;
-            bottom: auto;
-            right: auto;
             flex: 1 1 auto;
             width: 100%;
             max-width: 100%;
@@ -408,8 +404,9 @@
 
             & .about_person_img {
                 height: 100%;
+                max-height: 100%;
                 width: auto;
-                max-width: 90vw;
+                max-width: 92vw;
                 object-position: bottom center;
             }
         }

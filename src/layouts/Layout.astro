@@ -1,36 +1,86 @@
 ---
 interface Props {
-  title: string;
+  title?: string;
   description?: string;
+  image?: string;
 }
 
 const { 
-  title = "Luz Sara Community | Community Manager & Social Media", 
-  description = "Estrategia y creatividad para marcas que buscan crecer. Gestión de redes, Social Media y Meta Ads en Buenos Aires y online." 
+  title = "Luz Sara Community | Jazmín Isabella · Community Manager & Social Media", 
+  description = "Estrategia y creatividad para marcas que buscan crecer. Gestión de redes sociales, Social Media, Meta Ads, Branding y creación de contenido en Buenos Aires y online.",
+  image = "/og-image.jpg"
 } = Astro.props;
+
+const siteUrl = Astro.site ? Astro.site.toString() : "https://luzsaracommunity.com";
+const canonicalURL = new URL(Astro.url.pathname, siteUrl).toString();
+const socialImageURL = new URL(image, siteUrl).toString();
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Luz Sara Community",
+  "alternateName": "Jazmín Isabella - Community Manager",
+  "url": siteUrl,
+  "logo": new URL("/logo.svg", siteUrl).toString(),
+  "image": socialImageURL,
+  "description": description,
+  "telephone": "+5491134292032",
+  "email": "jazmin.isabella@luzsaracommunity.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Buenos Aires",
+    "addressCountry": "AR"
+  },
+  "areaServed": [
+    { "@type": "City", "name": "Buenos Aires" },
+    { "@type": "Country", "name": "Argentina" }
+  ],
+  "sameAs": [
+    "https://www.instagram.com/luzsaracommunity"
+  ],
+  "knowsAbout": [
+    "Community Management",
+    "Social Media Marketing",
+    "Meta Ads",
+    "Branding",
+    "Identidad de marca",
+    "Creación de contenido",
+    "Diseño gráfico para redes sociales"
+  ]
+};
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es-AR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="author" content="Jazmín Isabella - Luz Sara Community" />
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="community manager, social media, gestión de redes sociales, meta ads, publicidad en instagram, branding, identidad de marca, creación de contenido, community manager buenos aires, community manager argentina, jazmín isabella, luz sara community" />
+    
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="theme-color" content="#102d30" />
 
-    <!-- Open Graph / Redes Sociales (SEO Avanzado) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content="Luz Sara Community" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:image" content={socialImageURL} />
     <meta property="og:locale" content="es_AR" />
 
-    <!-- Favicon -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageURL} />
+
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
 
-    <!-- Google Fonts optimizadas -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
   </head>
   <body>
     <slot />
