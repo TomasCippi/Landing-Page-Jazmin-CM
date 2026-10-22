@@ -1,9 +1,9 @@
 <div align="center">
-  <img src="./assets/icons/icono.webp" alt="Logo de Jazmín Isabella" style="border-radius: 8px;">
+  <img src="./public/logo.svg" alt="Logo de Jazmín Isabella" width="120" style="border-radius: 8px;">
 
   ---
 
-  [Visitar el Sitio Web](https://tu-sitio.com/)
+  [Visitar el Sitio Web](https://luzsaracommunity.com/)
 </div>
 
 ---
@@ -23,7 +23,9 @@ Este proyecto contiene el código fuente de la landing page de **Jazmín Isabell
 
 ## 🛠️ Tecnologías
 
-- **Maquetado:** Estructura web estándar (HTML / CSS / JS).
+- **Framework:** [Astro](https://astro.build/), un framework pensado para sitios rápidos y orientados al contenido. Genera la página de forma estática y envía al navegador solo el JavaScript necesario, lo que se traduce en tiempos de carga muy bajos y mejor posicionamiento en buscadores (SEO).
+- **Componentes:** El sitio está dividido en componentes reutilizables (`.astro`) para cada sección: portada, servicios, proceso de trabajo, reseñas, preguntas frecuentes y contacto. Esto mantiene el código ordenado y fácil de mantener.
+- **Maquetado y estilos:** HTML y CSS, con JavaScript para las interacciones (carrusel de reseñas, preguntas frecuentes desplegables y animaciones).
 
 ## Versión
 
