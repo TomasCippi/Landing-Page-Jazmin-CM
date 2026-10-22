@@ -1,0 +1,138 @@
+---
+import "../styles/faq.css";
+
+const faqs = [
+  {
+    q: "¿Cómo empezamos a trabajar?",
+    a: "Me escribís por WhatsApp y me contás qué necesita tu marca. Después te envío un brief para conocerte a fondo y coordinamos una reunión inicial, virtual o presencial.",
+  },
+  {
+    q: "¿Cuánto cuestan los planes?",
+    a: "Cada marca es distinta, por eso armo planes personalizados. Tocá \"Ver planes y cotizar\" y te paso toda la información.",
+  },
+  {
+    q: "¿La inversión en publicidad está incluida?",
+    a: "La gestión de los anuncios sí está incluida. El presupuesto para la publicidad lo invierte cada marca, directamente en Meta.",
+  },
+  {
+    q: "¿Tengo que contratar por un mínimo de meses?",
+    a: "No, podés contratar mes a mes. Igualmente, una estrategia necesita tiempo: los resultados reales se empiezan a notar a partir del tercer mes.",
+  },
+  {
+    q: "¿Trabajás solo con marcas de Buenos Aires?",
+    a: "No, trabajo con marcas de todo el país y del exterior. Con las de Buenos Aires puedo trabajar de forma presencial, y con el resto, de forma remota. En esos casos no se realiza la grabación: vos me enviás el material y yo me encargo del resto.",
+  },
+  {
+    q: "¿Qué necesito tener listo antes de empezar?",
+    a: "Solo tener claro qué ofrece tu negocio y, si tenés, algunas fotos o material de tu marca. A partir de ahí vamos armando juntos: la estrategia, los textos y el diseño se van construyendo en cada etapa.",
+  },
+  {
+    q: "¿Puedo pedir un diseño suelto sin contratar un plan?",
+    a: "Sí. Con Diseños a pedido podés solicitar piezas puntuales, como flyers, tarjetas, etiquetas o edición de videos.",
+  },
+  {
+    q: "¿Cuáles son los medios de pago?",
+    a: "Transferencia bancaria, Mercado Pago, efectivo o dòlares (USD)",
+  },
+  {
+    q: "¿Con qué redes trabajás?",
+    a: "Con Instagram, Facebook, TikTok y LinkedIn. Vos elegís cuáles necesita tu marca.",
+  },
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(({ q, a }) => ({
+    "@type": "Question",
+    name: q,
+    acceptedAnswer: { "@type": "Answer", text: a },
+  })),
+};
+---
+
+<section class="faq" id="preguntas-frecuentes" aria-labelledby="faq-title">
+  <svg class="faq__tide" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 70C200 20 400 20 620 62S1020 104 1220 60 1380 36 1440 52V120H0Z" />
+    <path d="M0 92C240 52 480 52 720 88S1200 118 1440 80V120H0Z" />
+  </svg>
+
+  <div class="faq__inner">
+    <header class="faq__head">
+      <p class="faq__script">
+        <svg class="faq__spark" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 1c.9 6.4 4.6 10.1 11 11-6.4.9-10.1 4.6-11 11-.9-6.4-4.6-10.1-11-11 6.4-.9 10.1-4.6 11-11Z" />
+        </svg>
+        preguntas frecuentes
+      </p>
+      <h2 class="faq__title" id="faq-title">Tus dudas, resueltas</h2>
+      <svg class="faq__swell" viewBox="0 0 320 64" aria-hidden="true">
+        <path d="M0 12q20-16 40 0t40 0 40 0 40 0 40 0 40 0 40 0 40 0" />
+        <path d="M0 32q20-16 40 0t40 0 40 0 40 0 40 0 40 0 40 0 40 0" opacity=".6" />
+        <path d="M0 52q20-16 40 0t40 0 40 0 40 0 40 0 40 0 40 0 40 0" opacity=".3" />
+      </svg>
+    </header>
+
+    <ul class="faq__list">
+      {
+        faqs.map(({ q, a }, i) => (
+          <li class="faq__item">
+            <h3 class="faq__question">
+              <button
+                type="button"
+                class="faq__trigger"
+                id={`faq-q-${i}`}
+                aria-expanded="false"
+                aria-controls={`faq-a-${i}`}
+              >
+                <span class="faq__text">{q}</span>
+                <span class="faq__icon" aria-hidden="true">
+                  <svg class="faq__line" viewBox="0 0 24 14">
+                    <path d="M2 5q2.5-3 5 0t5 0 5 0 5 0M2 10q2.5-3 5 0t5 0 5 0 5 0" />
+                  </svg>
+                  <svg class="faq__water faq__water--back" viewBox="0 0 80 40" preserveAspectRatio="none">
+                    <path d="M0 10Q10 0 20 10T40 10T60 10T80 10V40H0Z" />
+                  </svg>
+                  <svg class="faq__water faq__water--front" viewBox="0 0 80 40" preserveAspectRatio="none">
+                    <path d="M0 10Q10 0 20 10T40 10T60 10T80 10V40H0Z" />
+                  </svg>
+                </span>
+              </button>
+            </h3>
+            <div class="faq__panel" id={`faq-a-${i}`} role="region" aria-labelledby={`faq-q-${i}`}>
+              <div class="faq__answer">
+                <p>{a}</p>
+              </div>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</section>
+
+<script>
+  const root = document.getElementById("preguntas-frecuentes");
+
+  root?.addEventListener("click", (event) => {
+    const trigger = (event.target as HTMLElement).closest<HTMLButtonElement>(".faq__trigger");
+    if (!trigger || !root) return;
+
+    const item = trigger.closest<HTMLElement>(".faq__item");
+    if (!item) return;
+
+    const wasOpen = item.hasAttribute("data-open");
+
+    root.querySelectorAll<HTMLElement>(".faq__item[data-open]").forEach((openItem) => {
+      openItem.removeAttribute("data-open");
+      openItem.querySelector(".faq__trigger")?.setAttribute("aria-expanded", "false");
+    });
+
+    if (!wasOpen) {
+      item.setAttribute("data-open", "");
+      trigger.setAttribute("aria-expanded", "true");
+    }
+  });
+</script>

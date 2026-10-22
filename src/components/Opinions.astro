@@ -1,157 +1,227 @@
 ---
 import { Image } from "astro:assets";
-import Boton from "./Buttons.astro";
+
 import resena1 from "../assets/reseña1.webp";
 import resena2 from "../assets/reseña2.webp";
 import resena3 from "../assets/reseña3.webp";
+import resena4 from "../assets/reseña1.webp";
+import resena5 from "../assets/reseña2.webp";
+
 import "../styles/opinions.css";
 
-const reviews = [
+const opinions = [
     {
         src: resena1,
-        alt: "Captura de WhatsApp de una clienta contando su experiencia positiva.",
+        alt: "Captura de WhatsApp de clienta de peluquería contando su crecimiento en Instagram.",
     },
     {
         src: resena2,
-        alt: "Captura de WhatsApp de Vane expresando conformidad con el trabajo.",
+        alt: "Captura de WhatsApp destacando el trabajo sutil, elegante y profesional.",
     },
     {
         src: resena3,
-        alt: "Captura de WhatsApp destacando el aumento de ventas.",
+        alt: "Captura de WhatsApp agradeciendo el cambio en Instagram y el aumento de clientas.",
+    },
+    {
+        src: resena4,
+        alt: "Captura de WhatsApp de clienta recomendando el servicio a colegas.",
+    },
+    {
+        src: resena5,
+        alt: "Captura de WhatsApp destacando la buena predisposición y rapidez.",
     },
 ];
+
+const initialIndex = 1;
 ---
 
-<section class="reviews_section" id="resenas" data-nav-theme="light" data-reviews>  
-    <!-- Íconos turquesa decorativos de fondo (Guía de marca: #5CB9BD) -->
-    <div class="floating_icon icon_1" aria-hidden="true">
+<section class="opinions_section" id="resenas" data-nav-theme="light" data-opinions aria-labelledby="opinions-heading">
+    <div class="opinions_spark_bg op_spark_1" aria-hidden="true">
         <svg viewBox="0 0 24 24"><path d="M12 0C12.6 7 17 11.4 24 12 17 12.6 12.6 17 12 24 11.4 17 7 12.6 0 12 7 11.4 11.4 7 12 0Z"/></svg>
     </div>
-    <div class="floating_icon icon_2" aria-hidden="true">
+    <div class="opinions_spark_bg op_spark_2" aria-hidden="true">
         <svg viewBox="0 0 24 24"><path d="M12 0C12.6 7 17 11.4 24 12 17 12.6 12.6 17 12 24 11.4 17 7 12.6 0 12 7 11.4 11.4 7 12 0Z"/></svg>
     </div>
-    <div class="floating_icon icon_3" aria-hidden="true">
+    <div class="opinions_spark_bg op_spark_3" aria-hidden="true">
         <svg viewBox="0 0 24 24"><path d="M12 0C12.6 7 17 11.4 24 12 17 12.6 12.6 17 12 24 11.4 17 7 12.6 0 12 7 11.4 11.4 7 12 0Z"/></svg>
     </div>
-    <div class="floating_icon icon_4" aria-hidden="true">
+    <div class="opinions_spark_bg op_spark_4" aria-hidden="true">
         <svg viewBox="0 0 24 24"><path d="M12 0C12.6 7 17 11.4 24 12 17 12.6 12.6 17 12 24 11.4 17 7 12.6 0 12 7 11.4 11.4 7 12 0Z"/></svg>
     </div>
 
-    <div class="reviews_container">  
-        <header class="reviews_header" data-reveal>  
-            <span class="reviews_kicker rv" style="--i: 0">  
-                <svg class="reviews_spark" viewBox="0 0 24 24" aria-hidden="true">  
-                    <path d="M12 0C12.6 7 17 11.4 24 12 17 12.6 12.6 17 12 24 11.4 17 7 12.6 0 12 7 11.4 11.4 7 12 0Z" />  
-                </svg>  
-                lo que dicen  
-                <svg class="reviews_spark" viewBox="0 0 24 24" aria-hidden="true">  
-                    <path d="M12 0C12.6 7 17 11.4 24 12 17 12.6 12.6 17 12 24 11.4 17 7 12.6 0 12 7 11.4 11.4 7 12 0Z" />  
-                </svg>  
-            </span>  
-            <h2 class="reviews_title rv" style="--i: 1">Mis clientes</h2>  
-        </header>  
+    <div class="opinions_container">
+        <header class="opinions_header" data-op-reveal>
+            <span class="opinions_badge op_rv" style="--i: 0">
+                <svg class="opinions_badge_icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 0C12.6 7 17 11.4 24 12 17 12.6 12.6 17 12 24 11.4 17 7 12.6 0 12 7 11.4 11.4 7 12 0Z" />
+                </svg>
+                <span>CASOS REALES</span>
+                <svg class="opinions_badge_icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 0C12.6 7 17 11.4 24 12 17 12.6 12.6 17 12 24 11.4 17 7 12.6 0 12 7 11.4 11.4 7 12 0Z" />
+                </svg>
+            </span>
 
-        <div class="reviews_stage" data-reveal>  
-            <!-- CORREGIDO: Se eliminó el atributo tabindex="0" del ul para cumplir con accesibilidad -->
-            <ul class="reviews_track" data-track aria-label="Reseñas de clientes">  
-                {reviews.map((r, i) => (  
-                    <li class="reviews_slide rv" style={`--i: ${i}`} data-slide>  
-                        <figure class="reviews_frame">  
-                            <Image  
-                                src={r.src}  
-                                alt={r.alt}  
-                                widths={[400, 600, 800]}  
-                                sizes="(min-width: 900px) 380px, 85vw"  
-                                loading="lazy"  
-                                decoding="async"  
-                                class="reviews_img"  
-                            />  
-                        </figure>  
-                    </li>  
-                ))}  
-            </ul>  
+            <h2 class="opinions_title op_rv" id="opinions-heading" style="--i: 1">
+                <span class="opinions_title_top">LO QUE DICEN</span>
+                <span class="opinions_title_script">mis clientes</span>
+            </h2>
+        </header>
 
-            <div class="reviews_dots" role="group" aria-label="Elegir reseña">  
-                {reviews.map((_, i) => (  
-                    <button  
-                        type="button"  
-                        class={`reviews_dot ${i === 0 ? "is_active" : ""}`}  
-                        aria-label={`Ver reseña ${i + 1}`}  
-                        aria-current={i === 0 ? "true" : "false"}  
-                        data-dot  
-                    ></button>  
-                ))}  
-            </div>  
-        </div>  
+        <div class="opinions_stage" data-op-reveal>
+            <div class="opinions_carousel_viewport" data-op-viewport>
+                <button type="button" class="opinions_nav_btn opinions_nav_prev" data-op-prev aria-label="Reseña anterior">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="m15 18-6-6 6-6"/>
+                    </svg>
+                </button>
 
-        <div class="reviews_cta" data-reveal>  
-            <h3 class="reviews_cta_title rv" style="--i: 0">  
-                ¿Querés ver los trabajos que realicé con distintos negocios?  
-            </h3>  
+                <ul class="opinions_track" data-op-track aria-label="Carrusel de reseñas de clientes">
+                    {opinions.map((item, idx) => (
+                        <li
+                            class="opinions_slide"
+                            data-op-slide
+                            data-index={idx}
+                            style={`--offset: ${idx - initialIndex}`}
+                        >
+                            <figure class="opinions_card">
+                                <Image
+                                    src={item.src}
+                                    alt={item.alt}
+                                    widths={[400, 600, 800]}
+                                    sizes="(min-width: 900px) 380px, 82vw"
+                                    loading="lazy"
+                                    decoding="async"
+                                    class="opinions_img"
+                                />
+                            </figure>
+                        </li>
+                    ))}
+                </ul>
 
-            <p class="reviews_cta_desc rv" style="--i: 1">  
-                Te envío un PDF con los diseños y el contenido que creé para marcas y emprendimientos, reseñas de clientes y mis condiciones de trabajo.  
-            </p>  
+                <button type="button" class="opinions_nav_btn opinions_nav_next" data-op-next aria-label="Siguiente reseña">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="m9 18 6-6-6-6"/>
+                    </svg>
+                </button>
+            </div>
 
-            <div class="reviews_cta_actions rv" style="--i: 2">  
-                <!-- Usamos la variante turquesa -->  
-                <Boton texto="VER PORTAFOLIO" href="#portafolio" variante="turquesa" />  
-            </div>  
-        </div>  
-    </div>  
+            <div class="opinions_dots" role="tablist" aria-label="Seleccionar reseña">
+                {opinions.map((_, idx) => (
+                    <button
+                        type="button"
+                        role="tab"
+                        class={`opinions_dot ${idx === initialIndex ? "is_active" : ""}`}
+                        aria-label={`Ir a la reseña ${idx + 1}`}
+                        aria-selected={idx === initialIndex ? "true" : "false"}
+                        data-op-dot={idx}
+                    ></button>
+                ))}
+            </div>
+        </div>
+
+        <div class="opinions_cta" data-op-reveal>
+            <div class="opinions_cta_content">
+                <h3 class="opinions_cta_title op_rv" style="--i: 0">
+                    ¿Querés ver los trabajos que realicé con distintos negocios?
+                </h3>
+                <p class="opinions_cta_desc op_rv" style="--i: 1">
+                    Te envío un PDF con los diseños y el contenido que creé para marcas y emprendimientos, reseñas de clientes y mis condiciones de trabajo.
+                </p>
+            </div>
+            <div class="opinions_cta_actions op_rv" style="--i: 2">
+                <a
+                    class="opinions_portfolio_btn"
+                    href="https://wa.me/5491134292032?text=Hola%20Jazm%C3%ADn!%20Me%20encantar%C3%ADa%20ver%20tu%20portafolio%20de%20trabajos."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <span>VER PORTAFOLIO</span>
+                </a>
+            </div>
+        </div>
+    </div>
 </section>
 
-<script>  
-    const root = document.querySelector<HTMLElement>("[data-reviews]");
+<script>
+    const section = document.querySelector<HTMLElement>("[data-opinions]");
 
-    if (root) {  
-        const reveal = new IntersectionObserver(  
-            (entries, obs) => {  
-                for (const entry of entries) {  
-                    if (entry.isIntersecting) {  
-                        entry.target.classList.add("is_inview");  
-                        obs.unobserve(entry.target);  
-                    }  
-                }  
-            },  
-            { threshold: 0.1, rootMargin: "0px 0px -5% 0px" }  
-        );  
-        root.querySelectorAll("[data-reveal]").forEach((el) => reveal.observe(el));
+    if (section) {
+        const revealObserver = new IntersectionObserver(
+            (entries, obs) => {
+                for (const entry of entries) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is_inview");
+                        obs.unobserve(entry.target);
+                    }
+                }
+            },
+            { threshold: 0.12 }
+        );
+        section.querySelectorAll("[data-op-reveal]").forEach((el) => revealObserver.observe(el));
 
-        const track = root.querySelector<HTMLElement>("[data-track]");  
-        const slides = Array.from(root.querySelectorAll<HTMLElement>("[data-slide]"));  
-        const dots = Array.from(root.querySelectorAll<HTMLButtonElement>("[data-dot]"));
+        const viewport = section.querySelector<HTMLElement>("[data-op-viewport]");
+        const slides = Array.from(section.querySelectorAll<HTMLElement>("[data-op-slide]"));
+        const dots = Array.from(section.querySelectorAll<HTMLButtonElement>("[data-op-dot]"));
+        const prevBtn = section.querySelector<HTMLButtonElement>("[data-op-prev]");
+        const nextBtn = section.querySelector<HTMLButtonElement>("[data-op-next]");
 
-        if (track && slides.length > 1) {  
-            const setActive = (index: number) => {  
-                dots.forEach((dot, i) => {  
-                    const on = i === index;  
-                    dot.classList.toggle("is_active", on);  
-                    dot.setAttribute("aria-current", on ? "true" : "false");  
-                });  
+        if (slides.length > 0) {
+            let currentIndex = 1;
+
+            const setActiveSlide = (index: number) => {
+                const total = slides.length;
+                currentIndex = ((index % total) + total) % total;
+
+                slides.forEach((slide, i) => {
+                    let offset = i - currentIndex;
+                    if (offset > total / 2) offset -= total;
+                    if (offset < -total / 2) offset += total;
+
+                    slide.style.setProperty("--offset", String(offset));
+                    slide.setAttribute("data-pos", String(offset));
+                    slide.classList.toggle("is_center", offset === 0);
+                });
+
+                dots.forEach((dot, i) => {
+                    const active = i === currentIndex;
+                    dot.classList.toggle("is_active", active);
+                    dot.setAttribute("aria-selected", active ? "true" : "false");
+                });
             };
 
-            const slideObserver = new IntersectionObserver(  
-                (entries) => {  
-                    for (const entry of entries) {  
-                        if (entry.isIntersecting) setActive(slides.indexOf(entry.target as HTMLElement));  
-                    }  
-                },  
-                { root: track, threshold: 0.6 }  
-            );  
-            slides.forEach((s) => slideObserver.observe(s));
+            prevBtn?.addEventListener("click", () => setActiveSlide(currentIndex - 1));
+            nextBtn?.addEventListener("click", () => setActiveSlide(currentIndex + 1));
 
-            const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            dots.forEach((dot, idx) => {
+                dot.addEventListener("click", () => setActiveSlide(idx));
+            });
 
-            dots.forEach((dot, i) => {  
-                dot.addEventListener("click", () => {  
-                    const slide = slides[i];  
-                    track.scrollTo({  
-                        left: slide.offsetLeft - (track.clientWidth - slide.clientWidth) / 2,  
-                        behavior: smooth ? "smooth" : "auto",  
-                    });  
-                });  
-            });  
-        }  
-    }  
+            slides.forEach((slide, idx) => {
+                slide.addEventListener("click", () => {
+                    if (idx !== currentIndex) setActiveSlide(idx);
+                });
+            });
+
+            let startX = 0;
+            let isDragging = false;
+
+            viewport?.addEventListener("pointerdown", (e) => {
+                if ((e.target as HTMLElement).closest("button")) return;
+                startX = e.clientX;
+                isDragging = true;
+            });
+
+            window.addEventListener("pointerup", (e) => {
+                if (!isDragging) return;
+                isDragging = false;
+                const diff = e.clientX - startX;
+                if (Math.abs(diff) > 40) {
+                    if (diff < 0) setActiveSlide(currentIndex + 1);
+                    else setActiveSlide(currentIndex - 1);
+                }
+            });
+
+            setActiveSlide(currentIndex);
+        }
+    }
 </script>

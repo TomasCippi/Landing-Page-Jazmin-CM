@@ -1,0 +1,139 @@
+---
+import "../styles/footer.css";
+
+const year = new Date().getFullYear();
+
+const contactos = [
+  {
+    label: "Email",
+    texto: "tuemail@gmail.com",
+    href: "mailto:tuemail@gmail.com",
+    icono: "M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5ZM3.5 7l8.5 6 8.5-6",
+  },
+  {
+    label: "WhatsApp",
+    texto: "+54 9 11 0000-0000",
+    href: "https://wa.me/5491100000000",
+    icono: "M5 4h3l1.5 4-2 1.3a11 11 0 0 0 6.2 6.2L15 13.5l4 1.5v3a2 2 0 0 1-2 2A14 14 0 0 1 3 6a2 2 0 0 1 2-2Z",
+  },
+  {
+    label: "Ubicación",
+    texto: "Buenos Aires, Argentina",
+    href: null,
+    icono: "M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21ZM12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z",
+  },
+];
+
+const redes = [
+  {
+    nombre: "Instagram",
+    href: "https://instagram.com/tu_usuario",
+    icono:
+      '<rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/>',
+  },
+  {
+    nombre: "WhatsApp",
+    href: "https://wa.me/5491100000000",
+    icono:
+      '<path d="M20.5 12a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.2-4.2A8.5 8.5 0 1 1 20.5 12Z"/><path d="M9.3 8.6c.2 2.4 2.5 4.7 5 5.2.5.1 1.2-.3 1.3-.9l-1.4-1-.9.5c-.8-.3-1.5-1.1-1.9-1.9l.5-.9-1-1.4c-.5.1-.9.3-.9.8Z" fill="currentColor" stroke="none"/>',
+  },
+  {
+    nombre: "TikTok",
+    href: "https://tiktok.com/@tu_usuario",
+    icono:
+      '<path d="M14 3v11.2a3.2 3.2 0 1 1-3.2-3.2"/><path d="M14 3c.3 2.4 1.9 4 4.5 4.2"/>',
+  },
+];
+---
+
+<footer class="footer" id="contacto">
+  <div class="footer__sea" aria-hidden="true">
+    <svg class="footer__wave footer__wave--back" viewBox="0 0 2880 120" preserveAspectRatio="none">
+      <path d="M0 60Q360 0 720 60T1440 60T2160 60T2880 60V120H0Z" />
+    </svg>
+    <svg class="footer__wave footer__wave--front" viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path d="M0 70Q360 20 720 70T1440 70V120H0Z" />
+    </svg>
+  </div>
+
+  <div class="footer__body">
+    <span class="footer__bubble" aria-hidden="true"></span>
+    <span class="footer__bubble" aria-hidden="true"></span>
+    <span class="footer__bubble" aria-hidden="true"></span>
+    <span class="footer__bubble" aria-hidden="true"></span>
+    <span class="footer__bubble" aria-hidden="true"></span>
+    <span class="footer__bubble" aria-hidden="true"></span>
+
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <a href="#inicio" class="footer__logo" aria-label="Ir al inicio">
+          <img src="/logo.svg" alt="Luzsara Community" width="120" height="36" loading="lazy" decoding="async" />
+        </a>
+        <p class="footer__script">contacto</p>
+        <h2 class="footer__title">¿Hablamos?</h2>
+        <p class="footer__tagline">Estrategia y creatividad para marcas que buscan crecer.</p>
+      </div>
+
+      <ul class="footer__contact">
+        {
+          contactos.map(({ label, texto, href, icono }) => (
+            <li>
+              {href ? (
+                <a class="footer__item" href={href}>
+                  <span class="footer__item-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <path d={icono} />
+                    </svg>
+                  </span>
+                  <span class="footer__item-text">
+                    <span class="footer__item-label">{label}</span>
+                    <span class="footer__item-value">{texto}</span>
+                  </span>
+                </a>
+              ) : (
+                <div class="footer__item">
+                  <span class="footer__item-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <path d={icono} />
+                    </svg>
+                  </span>
+                  <span class="footer__item-text">
+                    <span class="footer__item-label">{label}</span>
+                    <span class="footer__item-value">{texto}</span>
+                  </span>
+                </div>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="footer__social">
+        <p class="footer__label">Seguime en redes</p>
+        <ul class="footer__circles">
+          {
+            redes.map(({ nombre, href, icono }) => (
+              <li>
+                <a class="footer__circle" href={href} target="_blank" rel="noopener noreferrer" aria-label={nombre}>
+                  <svg viewBox="0 0 24 24" aria-hidden="true" set:html={icono} />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <p class="footer__legal">© {year} Luzsara Community. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  const footer = document.getElementById("contacto");
+
+  if (footer && "IntersectionObserver" in window) {
+    new IntersectionObserver(([entry]) => {
+      footer.toggleAttribute("data-live", entry.isIntersecting);
+    }).observe(footer);
+  }
+</script>
