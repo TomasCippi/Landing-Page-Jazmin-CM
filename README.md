@@ -1,43 +1,35 @@
-# Astro Starter Kit: Minimal
+<div align="center">
+  <img src="./assets/icons/icono.webp" alt="Logo de Jazmín Isabella" style="border-radius: 8px;">
 
-```sh
-npm create astro@latest -- --template minimal
-```
+  ---
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+  [Visitar el Sitio Web](https://tu-sitio.com/)
+</div>
 
-## 🚀 Project Structure
+---
 
-Inside of your Astro project, you'll see the following folders and files:
+## 📖 Sobre el Proyecto
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+Este proyecto contiene el código fuente de la landing page de **Jazmín Isabella**, Community Manager y creadora de contenido. Diseñada con un enfoque moderno, elegante y cercano, su objetivo principal es presentar los servicios, mostrar la forma de trabajo y facilitar que las marcas se contacten de manera rápida y directa.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🚀 Características
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- **Diseño con Identidad:** Una interfaz cuidada, con paleta en tonos verde azulados y crema, animaciones suaves y una estética que refleja la personalidad de la marca.
+- **Servicios Claros:** Sección dedicada a gestión de redes (Community Manager, Social Media y Meta Ads) y proyectos puntuales como branding y diseños a pedido.
+- **Proceso de Trabajo:** Una línea de tiempo paso a paso que explica cómo se trabaja, desde el brief inicial hasta los resultados.
+- **Prueba Social:** Reseñas de clientes y números destacados que transmiten confianza.
+- **Preguntas Frecuentes:** Respuestas rápidas a las dudas más comunes antes de contratar.
+- **Contacto Directo:** Botones de acción en toda la página para escribir por WhatsApp y ver el portafolio.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## 🛠️ Tecnologías
 
-## 🧞 Commands
+- **Maquetado:** Estructura web estándar (HTML / CSS / JS).
 
-All commands are run from the root of the project, from a terminal:
+## Versión
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+**v1.0.0** 
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+---
+<div align="center">
+  Programado y diseñado por <b>TC</b>
+</div>
