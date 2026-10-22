@@ -3,24 +3,26 @@ import "../styles/footer.css";
 
 const year = new Date().getFullYear();
 
+const whatsappSvg = `<path fill="currentColor" stroke="none" d="M12.03 2c-5.52 0-10 4.48-10 10 0 1.77.46 3.49 1.34 5.01L2 22l5.12-1.34A9.96 9.96 0 0 0 12.03 22c5.52 0 10-4.48 10-10s-4.48-10-10-10Zm0 18.18c-1.5 0-2.97-.4-4.25-1.16l-.3-.18-3.04.8.81-2.96-.2-.31a8.15 8.15 0 0 1-1.26-4.37c0-4.51 3.67-8.18 8.18-8.18 4.51 0 8.18 3.67 8.18 8.18 0 4.51-3.61 8.18-8.12 8.18Zm4.49-6.12c-.25-.12-1.46-.72-1.68-.8-.23-.08-.39-.12-.56.12-.16.25-.64.8-.78.97-.14.16-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.71-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.83-.2-.48-.4-.41-.56-.42h-.47c-.16 0-.43.06-.66.31-.23.25-.86.84-.86 2.06s.88 2.39 1.01 2.55c.12.16 1.74 2.66 4.21 3.73.59.25 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.23-.16-.47-.29Z"/>`;
+
 const contactos = [
   {
     label: "Email",
     texto: "jazmin.isabella@luzsaracommunity.com",
     href: "mailto:jazmin.isabella@luzsaracommunity.com",
-    icono: "M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5ZM3.5 7l8.5 6 8.5-6",
+    svg: `<path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5ZM3.5 7l8.5 6 8.5-6" />`,
   },
   {
     label: "WhatsApp",
-    texto: "+54 9 11 0000-0000",
-    href: "https://wa.me/5491100000000",
-    icono: "M5 4h3l1.5 4-2 1.3a11 11 0 0 0 6.2 6.2L15 13.5l4 1.5v3a2 2 0 0 1-2 2A14 14 0 0 1 3 6a2 2 0 0 1 2-2Z",
+    texto: "+54 9 11 3429-2032",
+    href: "https://wa.me/5491134292032?text=Hola%20Jazm%C3%ADn!%20Quiero%20hacerte%20una%20consulta.",
+    svg: whatsappSvg,
   },
   {
     label: "Ubicación",
     texto: "Buenos Aires, Argentina",
     href: null,
-    icono: "M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21ZM12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z",
+    svg: `<path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21ZM12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />`,
   },
 ];
 
@@ -34,8 +36,7 @@ const redes = [
   {
     nombre: "WhatsApp",
     href: "https://wa.me/5491134292032?text=Hola%20Jazm%C3%ADn!%20Me%20encantar%C3%ADa%20ver%20tu%20portafolio%20de%20trabajos.",
-    icono:
-      '<path d="M20.5 12a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.2-4.2A8.5 8.5 0 1 1 20.5 12Z"/><path d="M9.3 8.6c.2 2.4 2.5 4.7 5 5.2.5.1 1.2-.3 1.3-.9l-1.4-1-.9.5c-.8-.3-1.5-1.1-1.9-1.9l.5-.9-1-1.4c-.5.1-.9.3-.9.8Z" fill="currentColor" stroke="none"/>',
+    icono: whatsappSvg,
   },
   {
     nombre: "TikTok",
@@ -76,14 +77,12 @@ const redes = [
 
       <ul class="footer__contact">
         {
-          contactos.map(({ label, texto, href, icono }) => (
+          contactos.map(({ label, texto, href, svg }) => (
             <li>
               {href ? (
-                <a class="footer__item" href={href}>
+                <a class="footer__item" href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined}>
                   <span class="footer__item-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24">
-                      <path d={icono} />
-                    </svg>
+                    <svg viewBox="0 0 24 24" set:html={svg} />
                   </span>
                   <span class="footer__item-text">
                     <span class="footer__item-label">{label}</span>
@@ -93,9 +92,7 @@ const redes = [
               ) : (
                 <div class="footer__item">
                   <span class="footer__item-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24">
-                      <path d={icono} />
-                    </svg>
+                    <svg viewBox="0 0 24 24" set:html={svg} />
                   </span>
                   <span class="footer__item-text">
                     <span class="footer__item-label">{label}</span>
@@ -129,8 +126,6 @@ const redes = [
 </footer>
 
 <script>
-  // Las animaciones corren por defecto; solo se pausan cuando el footer
-  // está fuera de pantalla. Si este script falla, las burbujas siguen andando.
   let observer: IntersectionObserver | undefined;
 
   function initFooter() {
