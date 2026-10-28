@@ -8,7 +8,7 @@
 }
 
 .header_container {
-    --h1-size: 64px; 
+    --h1-size: 64px;
 
     position: relative;
     isolation: isolate;
@@ -81,35 +81,28 @@
         gap: 12px;
     }
 
-    & .header_subtitle {
-        font-family: var(--fuente-script, 'Great Vibes', cursive);
-        font-size: clamp(28px, 3.5vw, 40px);
-        color: var(--color-acento, #FAEC7F);
-        line-height: 1;
-    }
-
     & .header_title {
         font-family: var(--fuente-titulo, 'Cormorant Garamond', serif);
         font-weight: 400;
         font-size: var(--h1-size);
-        line-height: 0.9; /* Reducido para juntar las líneas blancas */
+        line-height: 0.9;
         letter-spacing: 0.5px;
         color: var(--color-base, #F1E5D5);
     }
 
     & .title_accent {
         font-family: var(--fuente-script, 'Great Vibes', cursive);
-        font-size: calc(var(--h1-size) * 1.6); 
+        font-size: calc(var(--h1-size) * 1.6);
         color: var(--color-acento, #FAEC7F);
         position: relative;
         display: inline-block;
         line-height: 0.7;
         padding: 0 6px;
         z-index: 2;
-        
+
         margin-top: calc(var(--h1-size) * -0.38);
         margin-bottom: calc(var(--h1-size) * -0.15);
-        
+
         transform-origin: center;
         transition: transform 0.5s ease;
 
@@ -136,6 +129,7 @@
         gap: 14px;
     }
 
+    /* Este salto ya no hace falta: "marca." siempre queda en su propio renglón */
     & .title_br_mobile {
         display: none;
     }
@@ -207,6 +201,8 @@
 
 /* ======================================================================
    RESPONSIVE
+   El título siempre se lee igual: "Convertí tus" / "redes sociales" /
+   "en una herramienta de crecimiento para tu" / "marca."
    ====================================================================== */
 
 @media (max-width: 1280px) {
@@ -227,75 +223,107 @@
     }
 }
 
-/* Celulares */
+/* Tablet y celular: una sola columna, con tamaños que escalan con la pantalla */
 @media (max-width: 860px) {
     .header_container {
-        --h1-size: 52px; /* Texto blanco más grande */
-        
+        --h1-size: clamp(28px, 9vw, 64px);
+
         flex-direction: column;
         justify-content: center;
+        gap: 12px;
         text-align: center;
-        padding: 0 24px;
-        height: 100vh;
-        height: 100svh;
-        overflow: hidden;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100svh;
+        padding: 100px 24px 64px; /* arriba deja lugar para el nav */
 
         &::after {
             display: none;
+        }
+
+        & .header_right_container {
+            order: -1;
+            flex: 0 0 auto;
+
+            & img {
+                width: clamp(120px, 26vw, 200px);
+            }
         }
 
         & .header_left_container {
             align-items: center;
             flex: 0 0 auto;
             width: 100%;
-            max-width: 560px;
-            gap: 16px; /* Reducido para dar más espacio vertical */
+            max-width: 640px;
+            gap: 20px;
         }
 
         & .left_text_container {
             align-items: center;
-            gap: 4px; /* Reducido para juntar el título con el subtítulo */
+            gap: 12px;
         }
 
         & .header_title {
-             line-height: 0.9; /* Juntamos más las líneas en móvil */
-        }
-
-        & .title_br {
-            display: none;
-        }
-
-        & .title_br_mobile {
-            display: block;
+            line-height: 0.95;
+            text-wrap: balance;
         }
 
         & .title_accent {
             display: block;
-            font-size: calc(var(--h1-size) * 1.8); /* Amarillo más grande */
-            margin-top: calc(var(--h1-size) * -0.4); /* Más pegado al texto superior */
-            margin-bottom: calc(var(--h1-size) * -0.2); 
+            width: fit-content;
+            margin-inline: auto;
+            font-size: calc(var(--h1-size) * 1.8);
+            line-height: 0.8;
+            margin-top: calc(var(--h1-size) * -0.14);
+            margin-bottom: calc(var(--h1-size) * -0.1);
+            white-space: nowrap;
+        }
+
+        & .header_text {
+            max-width: 520px;
+            font-size: clamp(15px, 2.4vw, 18px);
+            margin-top: 0;
         }
 
         & .left_buttons_container {
-            justify-content: center;
             flex-direction: column;
+            justify-content: center;
             width: 100%;
-            margin-top: 5px; /* Reducido */
-        }
-
-        & .header_right_container {
-            order: -1;
-            flex: 0 0 auto;
-            margin-bottom: 10px; /* Reducido para alejarlo del nav */
-            margin-top: 60px; /* Añadido espacio superior para que no lo corte el nav */
-
-            & img {
-                width: 130px; /* Logo un poco más chico para dar espacio */
-            }
+            margin-top: 4px;
         }
 
         & .mouse_button_container {
             display: none;
+        }
+    }
+}
+
+/* Tablet: los botones van lado a lado, no a todo el ancho */
+@media (min-width: 600px) and (max-width: 860px) {
+    .header_container {
+        & .left_buttons_container {
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: auto;
+        }
+    }
+}
+
+/* Celulares muy angostos */
+@media (max-width: 380px) {
+    .header_container {
+        padding-inline: 16px;
+    }
+}
+
+/* Pantallas bajitas (celu chico o celu acostado): logo más chico y menos aire */
+@media (max-width: 860px) and (max-height: 700px) {
+    .header_container {
+        padding-top: 88px;
+        padding-bottom: 40px;
+
+        & .header_right_container img {
+            width: 96px;
         }
     }
 }
