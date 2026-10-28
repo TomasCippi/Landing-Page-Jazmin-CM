@@ -1,0 +1,403 @@
+---
+import { Image, getImage } from "astro:assets";
+import "../styles/portafolio.css";
+
+const ogImage = new URL((await getImage({ src: import("../assets/portafolio/hero.webp"), width: 1200 })).src, Astro.url).href;
+---
+
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Portfolio Creativo Luzsara</title>
+<meta name="description" content="Portfolio de Jazmín Isabella Coto · Community Manager, contenido y Meta Ads." />
+<meta property="og:title" content="Portfolio Creativo · Luzsara Community" />
+<meta property="og:description" content="Casos de éxito, antes y después, métricas y piezas gráficas." />
+<meta property="og:image" content={ogImage} />
+
+<!-- Fuentes locales (public/fonts): precarga de las que se ven arriba de todo -->
+<link rel="preload" href="/fonts/Lora-Regular.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/GreatVibes-Regular.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="icon" type="image/svg+xml" href="/logo.svg" />
+<style is:global>
+@font-face{font-family:"Lora";font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/Lora-Regular.woff2) format("woff2")}
+@font-face{font-family:"Great Vibes";font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/GreatVibes-Regular.woff2) format("woff2")}
+@font-face{font-family:"Poppins";font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/Poppins-Regular.woff2) format("woff2")}
+@font-face{font-family:"Poppins";font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/Poppins-Medium.woff2) format("woff2")}
+@font-face{font-family:"Poppins";font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/Poppins-SemiBold.woff2) format("woff2")}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="wavepath" d="M0 20 C150 4 300 36 450 20 S750 4 900 20 S1200 36 1350 20 S1650 4 1800 20 V40 H0Z"/>
+    <symbol id="arrows" viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5" fill="none" stroke="#1E2828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="uparrow" viewBox="0 0 12 12"><path d="M6 10V2M2.5 5.5L6 2l3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="hand" viewBox="0 0 20 20"><path d="M3 10h14M6 7l-3 3 3 3M14 7l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio">LUZSARACOMMUNITY</a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#casos">Casos</a><a href="#siatkov">Siatkov</a><a href="#forthem">Forthem</a><a href="#tempo">Tempo</a><a href="#piezas">Piezas</a><a href="#opiniones">Opiniones</a>
+    </nav>
+    <a class="cta-mini" href="#contacto">Hablemos</a>
+  </div>
+  <div class="progress" id="progress"></div>
+</header>
+
+<!-- HERO · crema -->
+<section class="hero" id="inicio">
+  <svg class="sun" viewBox="0 0 200 200" aria-hidden="true">
+    <g class="rays" fill="#FAEC7F">
+      <polygon points="100,2 106,24 94,24"/><polygon points="100,198 106,176 94,176"/><polygon points="2,100 24,94 24,106"/><polygon points="198,100 176,94 176,106"/>
+      <polygon points="31,31 49,44 44,49"/><polygon points="169,169 151,156 156,151"/><polygon points="169,31 156,49 151,44"/><polygon points="31,169 44,151 49,156"/>
+      <polygon points="62,9 72,30 61,33"/><polygon points="138,191 128,170 139,167"/><polygon points="191,62 170,72 167,61"/><polygon points="9,138 30,128 33,139"/>
+      <polygon points="138,9 139,33 128,30"/><polygon points="62,191 61,167 72,170"/><polygon points="191,138 167,139 170,128"/><polygon points="9,62 33,61 30,72"/>
+    </g>
+    <g class="core"><circle cx="100" cy="100" r="66" fill="#FCF4B9"/><circle cx="100" cy="100" r="50" fill="#FAEC7F"/></g>
+  </svg>
+  <div class="wrap">
+    <div class="titleblock">
+    <p class="hero-title" aria-label="Portfolio">{"PORTFOLIO".split("").map((c, i) => <span style={`--i:${i}`}>{c}</span>)}</p>
+    <p class="creativo"><span class="mark"></span><span class="ink">Creativo</span></p>
+    </div>
+    <div class="stage">
+      <div class="photo"><Image src={import("../assets/portafolio/hero.webp")} alt="Jazmín Isabella Coto con una tablet" widths={[380, 760]} sizes="(max-width:700px) 74vw, 380px" loading="eager" fetchpriority="high" /></div>
+      <div class="who">
+        <h1>Jazmín Isabella Coto</h1>
+        <div class="tags"><span class="tag" style="--i:0">Diseño de redes</span><span class="tag" style="--i:1">Contenido</span><span class="tag y" style="--i:2">Meta Ads</span></div>
+        <div class="line"></div>
+        <small>PORTFOLIO 2026</small>
+      </div>
+    </div>
+  </div>
+  <div class="waves" aria-hidden="true">
+    <svg class="w1" viewBox="0 0 2400 120" preserveAspectRatio="none"><path fill="#A8D0CB" d="M0 50 C200 20 400 80 600 50 S1000 20 1200 50 S1600 80 1800 50 S2200 20 2400 50 V120 H0Z"/></svg>
+    <svg class="w2" viewBox="0 0 2400 120" preserveAspectRatio="none"><path fill="#5CB9BD" d="M0 60 C200 90 400 30 600 60 S1000 90 1200 60 S1600 30 1800 60 S2200 90 2400 60 V120 H0Z"/></svg>
+    <svg class="w3" viewBox="0 0 2400 120" preserveAspectRatio="none"><path fill="#5CB9BD" d="M0 70 C300 50 300 90 600 70 S900 50 1200 70 S1500 90 1800 70 S2100 50 2400 70 V120 H0Z"/></svg>
+  </div>
+</section>
+
+<!-- CASOS · turquesa -->
+<section class="band b-turq" id="casos" style="padding-top:clamp(40px,6vw,72px)">
+  <div class="wrap">
+    <h2 class="rv">Casos de <span class="s">éxito</span></h2>
+    <div class="cases">
+      <a class="case rv" href="#siatkov" style="--c:var(--turquesa)">
+        <p class="label">Siatkov Estudio · Danza</p>
+        <p class="big"><span class="count" data-to="68">68</span> → <span class="count" data-to="2086">2.086</span></p>
+        <p class="d">seguidores en una cuenta que arrancó con 0 publicaciones</p>
+        <span class="go">Ver el caso <i>→</i></span>
+      </a>
+      <a class="case rv" href="#forthem" style="--c:var(--amarillo)">
+        <p class="label">Forthem Beauty · Estética</p>
+        <p class="big"><span class="count" data-to="58">58</span></p>
+        <p class="d">conversaciones con potenciales pacientes en 2 campañas de Meta Ads, invirtiendo menos de $60.000 en total</p>
+        <span class="go">Ver el caso <i>→</i></span>
+      </a>
+      <a class="case rv" href="#tempo" style="--c:var(--petroleo)">
+        <p class="label">Tempo · Música y artes</p>
+        <p class="big"><span class="count" data-to="122" data-prefix="+" data-suffix="%">+122%</span></p>
+        <p class="d">de interacciones con el contenido en los últimos 28 días</p>
+        <span class="go">Ver el caso <i>→</i></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SIATKOV · crema claro -->
+<section class="band b-crema2" id="siatkov">
+  <div class="wrap">
+    <div class="client-head rv"><span class="chip">Caso 1</span><span class="label" style="margin:0">Siatkov Estudio · Escuela de danza</span></div>
+    <h2 class="rv">Siatkov Estudio <span class="s">antes y después</span></h2>
+    <div class="split">
+      <div class="ba-box rv">
+        <div class="ba" style="--ar:1160/796">
+          <Image src={import("../assets/portafolio/siatkov-despues.webp")} alt="Perfil de Siatkov después: 107 publicaciones y 2.086 seguidores" widths={[480, 640, 1000]} sizes="(max-width:860px) calc(100vw - 32px), 640px" />
+          <Image src={import("../assets/portafolio/siatkov-antes.webp")} alt="Perfil de Siatkov antes: 0 publicaciones y 68 seguidores" class="before" widths={[480, 640, 1000]} sizes="(max-width:860px) calc(100vw - 32px), 640px" />
+          <span class="lbl l">Antes</span><span class="lbl r">Después</span>
+          <div class="handle"></div><div class="knob"><svg><use href="#arrows"/></svg></div>
+          <input type="range" id="ba-siatkov" min="0" max="100" value="50" aria-label="Comparar el perfil de Siatkov antes y después">
+        </div>
+        <p class="how"><svg><use href="#hand"/></svg>Mové la barra amarilla para comparar</p>
+      </div>
+      <div class="stats">
+        <div class="stat rv"><div class="n"><span class="count" data-to="2018" data-prefix="+">+2.018</span></div><p>seguidores nuevos</p></div>
+        <div class="stat rv"><div class="n"><span class="count" data-to="107">107</span></div><p>publicaciones creadas desde cero</p></div>
+        <div class="stat rv"><div class="n">Bio</div><p>clara y ordenada: clases, eventos y alquiler de sala</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIATKOV REELS · petróleo -->
+<section class="band b-petro">
+  <div class="wave-top" aria-hidden="true"><svg viewBox="0 0 1800 40" preserveAspectRatio="none"><use href="#wavepath"/></svg></div>
+  <div class="wrap split rev">
+    <div>
+      <p class="label rv">Siatkov · Estrategia de contenido</p>
+      <h2 class="rv">Reels que muestran la escuela <span class="s">por dentro</span></h2>
+      <ul class="bullets rv">
+        <li><span class="dotn">1</span><span>Clases y coreografías reales grabadas en la sala</span></li>
+        <li><span class="dotn">2</span><span>Presentación de cada profe para generar confianza</span></li>
+        <li><span class="dotn">3</span><span>Flyers de eventos y trends con humor que se comparten</span></li>
+      </ul>
+    </div>
+    <div class="phone rv" aria-label="Feed de Reels de Siatkov desplazándose">
+      <Image class="scroller" src={import("../assets/portafolio/siatkov-reels.webp")} alt="" widths={[280, 560]} sizes="280px" />
+    </div>
+  </div>
+</section>
+
+<!-- SIATKOV MÉTRICAS · crema -->
+<section class="band b-crema">
+  <div class="wrap split">
+    <div>
+      <p class="label rv">Siatkov · Últimos 28 días</p>
+      <h2 class="rv">Crecimiento real <span class="s">y orgánico</span></h2>
+      <div class="tiles">
+        <div class="tile rv"><div class="n"><span class="count" data-to="85">85</span> mil</div><p>visualizaciones<br><span class="up"><svg><use href="#uparrow"/></svg>48,2%</span></p></div>
+        <div class="tile rv"><div class="n"><span class="count" data-to="3000">3.000</span></div><p>interacciones<br><span class="up"><svg><use href="#uparrow"/></svg>171%</span></p></div>
+        <div class="tile rv"><div class="n"><span class="count" data-to="151">151</span></div><p>seguimientos nuevos<br><span class="up"><svg><use href="#uparrow"/></svg>136%</span></p></div>
+        <div class="tile rv"><div class="n"><span class="count" data-to="25">25</span></div><p>contactos por mensaje<br><span class="up"><svg><use href="#uparrow"/></svg>25%</span></p></div>
+        <div class="tile highlight rv">
+          <p class="label">Reel destacado de bachata</p>
+          <div class="hl-row">
+            <div><b class="count" data-to="18510">18.510</b><span>visualizaciones</span></div>
+            <div><b class="count" data-to="827">827</b><span>me gusta</span></div>
+            <div><b class="count" data-to="122">122</b><span>compartidos</span></div>
+            <div><b class="count" data-to="41">41</b><span>seguidores nuevos</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="shots">
+      <div class="shot rv"><Image src={import("../assets/portafolio/siatkov-insights.webp")} alt="Estadísticas de Instagram de Siatkov en 28 días" widths={[340, 680]} sizes="(max-width:400px) calc(100vw - 32px), 340px" /></div>
+      <div class="shot rv"><Image src={import("../assets/portafolio/siatkov-reel.webp")} alt="Resumen del Reel de bachata" widths={[340, 680]} sizes="(max-width:400px) calc(100vw - 32px), 340px" /></div>
+      <p class="cap">Capturas reales de Instagram</p>
+    </div>
+  </div>
+</section>
+
+<!-- FORTHEM · amarillo -->
+<section class="band b-amar" id="forthem">
+  <div class="wave-top" aria-hidden="true"><svg viewBox="0 0 1800 40" preserveAspectRatio="none"><use href="#wavepath"/></svg></div>
+  <div class="wrap">
+    <div class="client-head rv"><span class="chip">Caso 2</span><span class="label" style="margin:0">Forthem Beauty · Medicina estética</span></div>
+    <h2 class="rv">Forthem Beauty <span class="s">antes y después</span></h2>
+    <div class="split">
+      <div class="ba-box rv">
+        <div class="ba" style="--ar:960/1052">
+          <Image src={import("../assets/portafolio/forthem-despues.webp")} alt="Perfil de Forthem después: 141 publicaciones y 4.772 seguidores" widths={[480, 640, 1000]} sizes="(max-width:860px) calc(100vw - 32px), 640px" />
+          <Image src={import("../assets/portafolio/forthem-antes.webp")} alt="Perfil de Forthem antes: 90 publicaciones y 3.976 seguidores" class="before" widths={[480, 640, 1000]} sizes="(max-width:860px) calc(100vw - 32px), 640px" />
+          <span class="lbl l">Antes</span><span class="lbl r">Después</span>
+          <div class="handle"></div><div class="knob"><svg><use href="#arrows"/></svg></div>
+          <input type="range" id="ba-forthem" min="0" max="100" value="50" aria-label="Comparar el perfil de Forthem antes y después">
+        </div>
+        <p class="how"><svg><use href="#hand"/></svg>Mové la barra amarilla para comparar</p>
+      </div>
+      <div class="stats">
+        <div class="stat rv"><div class="n"><span class="count" data-to="796" data-prefix="+">+796</span></div><p>seguidores en solo 2 meses (de 3.976 a 4.772)</p></div>
+        <div class="stat rv"><div class="n"><span class="count" data-to="51" data-prefix="+">+51</span></div><p>publicaciones con identidad propia</p></div>
+        <div class="stat rv"><div class="n"><span class="count" data-to="4">4</span></div><p>destacadas nuevas: clientes, cuidados, pagos y ubicación</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORTHEM MÉTRICAS · crema claro -->
+<section class="band b-crema2">
+  <div class="wrap split">
+    <div>
+      <p class="label rv">Forthem · Últimos 28 días</p>
+      <h2 class="rv">Todas las métricas <span class="s">en subida</span></h2>
+      <div class="tiles">
+        <div class="tile rv"><div class="n"><span class="count" data-to="64.4" data-dec="1">64,4</span> mil</div><p>visualizaciones<br><span class="up"><svg><use href="#uparrow"/></svg>18,1%</span></p></div>
+        <div class="tile rv"><div class="n"><span class="count" data-to="329">329</span></div><p>interacciones<br><span class="up"><svg><use href="#uparrow"/></svg>49,5%</span></p></div>
+        <div class="tile rv"><div class="n"><span class="count" data-to="112">112</span></div><p>contactos por mensaje<br><span class="up"><svg><use href="#uparrow"/></svg>41,8%</span></p></div>
+        <div class="tile rv"><div class="n"><span class="count" data-to="99">99</span></div><p>seguimientos nuevos<br><span class="up"><svg><use href="#uparrow"/></svg>76,8%</span></p></div>
+      </div>
+    </div>
+    <div class="shots">
+      <div class="shot rv"><Image src={import("../assets/portafolio/forthem-insights.webp")} alt="Estadísticas de Instagram de Forthem en 28 días" widths={[340, 680]} sizes="(max-width:400px) calc(100vw - 32px), 340px" /></div>
+      <p class="cap">Capturas reales de Instagram</p>
+    </div>
+  </div>
+</section>
+
+<!-- FORTHEM ADS · turquesa -->
+<section class="band b-turq" style="overflow:hidden">
+  <div class="wave-top" aria-hidden="true"><svg viewBox="0 0 1800 40" preserveAspectRatio="none"><use href="#wavepath"/></svg></div>
+  <svg class="sun" viewBox="0 0 200 200" aria-hidden="true"><g class="core"><circle cx="100" cy="100" r="96" fill="#FCF4B9"/><circle cx="100" cy="100" r="72" fill="#FAEC7F"/></g></svg>
+  <div class="wrap split">
+    <div>
+      <p class="label rv">Forthem · Publicidad en Meta Ads</p>
+      <div class="ads-big rv"><span class="n count" data-to="58">58</span><span class="s">conversaciones</span></div>
+      <p class="ads-text rv">iniciadas por mensaje con potenciales pacientes, en solo 2 campañas de agosto y con un presupuesto chico: menos de $60.000 en total.</p>
+      <div class="pills rv"><span class="pill y">≈ $1.030 por conversación</span><span class="pill">$59.765 de inversión total</span></div>
+    </div>
+    <div class="shots"><div class="shot rv"><Image src={import("../assets/portafolio/forthem-ads.webp")} alt="Campañas de Meta Ads con 22 y 36 conversaciones iniciadas" widths={[340, 680]} sizes="(max-width:400px) calc(100vw - 32px), 340px" /></div></div>
+  </div>
+</section>
+
+<!-- TEMPO · crema -->
+<section class="band b-crema" id="tempo">
+  <div class="wrap split rev">
+    <div>
+      <div class="client-head rv"><span class="chip">Caso 3</span><span class="label" style="margin:0">Tempo · Escuela de música y artes</span></div>
+      <h2 class="rv">De flyers a contenido <span class="s">que conecta</span></h2>
+      <ul class="bullets rv">
+        <li><span class="dotn" style="background:var(--crema-2)">✕</span><span><b>Antes:</b> placas llenas de texto, todas iguales, que nadie frenaba a leer.</span></li>
+        <li><span class="dotn" style="background:var(--turquesa)">✓</span><span><b>Después:</b> carruseles con gancho y llamado a la acción, Reels en la sede y destacadas ordenadas.</span></li>
+      </ul>
+    </div>
+    <div class="ba-box rv" style="max-width:320px;width:100%;margin-inline:auto">
+      <div class="ba" style="--ar:960/1644">
+        <Image src={import("../assets/portafolio/tempo-despues.webp")} alt="Feed de Tempo después, con carruseles y Reels" widths={[320, 640]} sizes="320px" />
+        <Image src={import("../assets/portafolio/tempo-antes.webp")} alt="Feed de Tempo antes, con placas de texto" class="before" widths={[320, 640]} sizes="320px" />
+        <span class="lbl l">Antes</span><span class="lbl r">Después</span>
+        <div class="handle"></div><div class="knob"><svg><use href="#arrows"/></svg></div>
+        <input type="range" id="ba-tempo" min="0" max="100" value="50" aria-label="Comparar el feed de Tempo antes y después">
+      </div>
+      <p class="how"><svg><use href="#hand"/></svg>Mové la barra amarilla para comparar</p>
+    </div>
+  </div>
+</section>
+
+<!-- TEMPO MÉTRICAS · petróleo -->
+<section class="band b-petro">
+  <div class="wave-top" aria-hidden="true"><svg viewBox="0 0 1800 40" preserveAspectRatio="none"><use href="#wavepath"/></svg></div>
+  <div class="wrap split">
+    <div>
+      <p class="label rv">Tempo · Últimos 28 días</p>
+      <h2 class="rv">Más del doble <span class="s">de interacciones</span></h2>
+      <div class="tiles">
+        <div class="tile rv"><div class="n"><span class="count" data-to="122" data-prefix="+" data-suffix="%">+122%</span></div><p>interacciones<br><b>109 en total</b></p></div>
+        <div class="tile rv"><div class="n"><span class="count" data-to="54.3" data-dec="1">54,3</span> mil</div><p>visualizaciones<br><span class="up"><svg><use href="#uparrow"/></svg>10%</span></p></div>
+        <div class="tile rv"><div class="n"><span class="count" data-to="30.8" data-dec="1" data-prefix="+" data-suffix="%">+30,8%</span></div><p>contactos por mensaje<br><b>17 en total</b></p></div>
+        <div class="tile rv"><div class="n"><span class="count" data-to="20.3" data-dec="1" data-prefix="+" data-suffix="%">+20,3%</span></div><p>seguimientos nuevos<br><b>71 en total</b></p></div>
+      </div>
+      <p class="note rv">Los 3 posteos más vistos son carruseles y Reels del nuevo formato.</p>
+    </div>
+    <div class="shots"><div class="shot rv"><Image src={import("../assets/portafolio/tempo-insights.webp")} alt="Estadísticas de Instagram de Tempo en 28 días" widths={[340, 680]} sizes="(max-width:400px) calc(100vw - 32px), 340px" /></div></div>
+  </div>
+</section>
+
+<!-- MÁS PERFILES · amarillo -->
+<section class="band b-amar" id="perfiles">
+  <div class="wave-top" aria-hidden="true"><svg viewBox="0 0 1800 40" preserveAspectRatio="none"><use href="#wavepath"/></svg></div>
+  <div class="wrap">
+    <h2 class="rv">Más perfiles <span class="s">transformados</span></h2>
+    <div class="flips">
+      <div class="flip rv"><button type="button" aria-label="Cambiar entre antes y después de Diargle"><span class="state">Antes</span><Image src={import("../assets/portafolio/diargle-antes.webp")} alt="Feed de Diargle antes" class="before" widths={[200, 340, 680]} sizes="(max-width:760px) 30vw, 340px" /><Image src={import("../assets/portafolio/diargle-despues.webp")} alt="Feed de Diargle después" class="after" widths={[200, 340, 680]} sizes="(max-width:760px) 30vw, 340px" /></button><p class="name">Diargle<small>Peluquería</small></p></div>
+      <div class="flip rv"><button type="button" aria-label="Cambiar entre antes y después de Sintonía Educativa"><span class="state">Antes</span><Image src={import("../assets/portafolio/sintonia-antes.webp")} alt="Feed de Sintonía Educativa antes" class="before" widths={[200, 340, 680]} sizes="(max-width:760px) 30vw, 340px" /><Image src={import("../assets/portafolio/sintonia-despues.webp")} alt="Feed de Sintonía Educativa después" class="after" widths={[200, 340, 680]} sizes="(max-width:760px) 30vw, 340px" /></button><p class="name">Sintonía Educativa<small>Formación</small></p></div>
+      <div class="flip rv"><button type="button" aria-label="Cambiar entre antes y después de Louise Nail Studio"><span class="state">Antes</span><Image src={import("../assets/portafolio/louise-antes.webp")} alt="Feed de Louise Nail Studio antes" class="before" widths={[200, 340, 680]} sizes="(max-width:760px) 30vw, 340px" /><Image src={import("../assets/portafolio/louise-despues.webp")} alt="Feed de Louise Nail Studio después" class="after" widths={[200, 340, 680]} sizes="(max-width:760px) 30vw, 340px" /></button><p class="name">Louise Nail Studio<small>Estética</small></p></div>
+    </div>
+    <p class="how" style="justify-content:center;margin-top:20px">Cambian solos entre antes y después · tocá uno para frenarlo</p>
+  </div>
+</section>
+
+<!-- PIEZAS · crema claro -->
+<section class="band b-crema2" id="piezas">
+  <div class="wrap">
+    <p class="label rv">Piezas gráficas</p>
+    <h2 class="rv">Diseño que <span class="s">se frena a mirar</span></h2>
+    <p class="eti-note rv">Posts, historias, flyers y diseño de etiquetas para marcas propias, como la línea capilar de Dyarg Essential.</p>
+    <div class="tabs" role="tablist" aria-label="Tipo de pieza">
+      <button role="tab" aria-selected="true" data-t="t-car" id="tab-car">Carruseles y posts</button>
+      <button role="tab" aria-selected="false" data-t="t-hist" id="tab-hist">Historias</button>
+      <button role="tab" aria-selected="false" data-t="t-fly" id="tab-fly">Flyers</button>
+      <button role="tab" aria-selected="false" data-t="t-eti" id="tab-eti">Etiquetas</button>
+    </div>
+    <div class="track" id="t-car" role="tabpanel" aria-labelledby="tab-car">
+      <figure class="piece" style="--i:0"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/p-tempo-mente.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/p-tempo-mente.webp")} alt="Carrusel educativo de Tempo sobre música y mente" widths={[240, 480]} sizes="clamp(200px,22vw,240px)" /></button><span>Tempo · Carrusel educativo</span></figure>
+      <figure class="piece" style="--i:1"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/car2.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/car2.webp")} alt="Carrusel de tratamiento de NutraGenet" widths={[240, 480]} sizes="clamp(200px,22vw,240px)" /></button><span>NutraGenet · Carrusel de tratamiento</span></figure>
+      <figure class="piece" style="--i:2"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/p-nutragenet.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/p-nutragenet.webp")} alt="Carrusel de NutraGenet sobre dónde encontrar magnesio" widths={[240, 480]} sizes="clamp(200px,22vw,240px)" /></button><span>NutraGenet · Carrusel educativo</span></figure>
+      <figure class="piece" style="--i:3"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/p-macabro-servicios.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/p-macabro-servicios.webp")} alt="Portada de carrusel de servicios de Macabro Barber Studio" widths={[240, 480]} sizes="clamp(200px,22vw,240px)" /></button><span>Macabro · Carrusel de servicios</span></figure>
+      <figure class="piece" style="--i:4"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/p-macabro-color.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/p-macabro-color.webp")} alt="Placa del servicio de color de Macabro Barber Studio" widths={[240, 480]} sizes="clamp(200px,22vw,240px)" /></button><span>Macabro · Servicio de color</span></figure>
+      <figure class="piece" style="--i:5"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/p-peach.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/p-peach.webp")} alt="Post de producto Elfbar Peach" widths={[240, 480]} sizes="clamp(200px,22vw,240px)" /></button><span>Zyra Imports · Post de producto</span></figure>
+    </div>
+    <div class="track" id="t-hist" role="tabpanel" aria-labelledby="tab-hist" hidden>
+      <figure class="piece" style="--i:0"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/h-velvet-5cosas.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/h-velvet-5cosas.webp")} alt="Historia de Velvet: 5 cosas que no sabías sobre el microblading" widths={[240, 480]} sizes="clamp(200px,22vw,240px)" /></button><span>Velvet · Historia educativa</span></figure>
+      <figure class="piece" style="--i:1"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/h-velvet-microblading.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/h-velvet-microblading.webp")} alt="Historia de Velvet con datos sobre microblading" widths={[240, 480]} sizes="clamp(200px,22vw,240px)" /></button><span>Velvet · Datos de microblading</span></figure>
+      <figure class="piece" style="--i:2"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/h-velvet-cuello.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/h-velvet-cuello.webp")} alt="Historia de Velvet con consejos para el dolor de cuello" widths={[240, 480]} sizes="clamp(200px,22vw,240px)" /></button><span>Velvet · Consejos + llamado a la acción</span></figure>
+      <figure class="piece" style="--i:3"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/h-forthem-amistad.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/h-forthem-amistad.webp")} alt="Saludo de Forthem Beauty por el Día del Amigo" widths={[240, 480]} sizes="clamp(200px,22vw,240px)" /></button><span>Forthem · Día del Amigo</span></figure>
+      <figure class="piece" style="--i:4"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/h-tempo-papa.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/h-tempo-papa.webp")} alt="Promo de gift card de Tempo para el Día del Padre" widths={[240, 480]} sizes="clamp(200px,22vw,240px)" /></button><span>Tempo · Día del Padre</span></figure>
+      <figure class="piece" style="--i:5"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/h-sanvalentin.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/h-sanvalentin.webp")} alt="Historia de Siatkov por San Valentín" widths={[240, 480]} sizes="clamp(200px,22vw,240px)" /></button><span>Siatkov · San Valentín</span></figure>
+      <figure class="piece" style="--i:6"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/h-tempo10.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/h-tempo10.webp")} alt="Historia de Tempo por el retiro de un 10" widths={[240, 480]} sizes="clamp(200px,22vw,240px)" /></button><span>Tempo · Contenido de momento</span></figure>
+      <figure class="piece" style="--i:7"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/h-aurora.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/h-aurora.webp")} alt="Historia de producto Elfbar Aurora Berries" widths={[240, 480]} sizes="clamp(200px,22vw,240px)" /></button><span>Zyra Imports · Lanzamiento</span></figure>
+    </div>
+    <div class="track" id="t-fly" role="tabpanel" aria-labelledby="tab-fly" hidden>
+      <figure class="piece" style="--i:0"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/f-siatkov-abril.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/f-siatkov-abril.webp")} alt="Flyer de Siatkov presenta bachata y salsa, 16 de abril" widths={[240, 480]} sizes="clamp(200px,22vw,240px)" /></button><span>Siatkov · Evento de bachata y salsa</span></figure>
+      <figure class="piece" style="--i:1"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/f-siatkov-mayo.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/f-siatkov-mayo.webp")} alt="Flyer de Siatkov y Roxdy, bachata y salsa del 20 de mayo" widths={[240, 480]} sizes="clamp(200px,22vw,240px)" /></button><span>Siatkov × Roxdy · Evento social</span></figure>
+      <figure class="piece" style="--i:2"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/f-colonia.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/f-colonia.webp")} alt="Flyer de colonia de vacaciones de invierno de Tempo" widths={[240, 480]} sizes="clamp(200px,22vw,240px)" /></button><span>Tempo · Colonia de invierno</span></figure>
+    </div>
+    <div class="track" id="t-eti" role="tabpanel" aria-labelledby="tab-eti" hidden>
+      <figure class="piece wide" style="--i:0"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/e-ampolla-jojoba.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/e-ampolla-jojoba.webp")} alt="Etiqueta de Dyarg Essential: Ampolla Criogénica Jojoba y CBD" widths={[420, 840]} sizes="clamp(280px,40vw,420px)" /></button><span>Etiqueta · Ampolla Jojoba & CBD</span></figure>
+      <figure class="piece" style="--i:1"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/e-mock-biotina.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/e-mock-biotina.webp")} alt="Mockup del Shampoo Biotina de Dyarg Essential" widths={[240, 480]} sizes="clamp(200px,22vw,240px)" /></button><span>Mockup · Shampoo Biotina</span></figure>
+      <figure class="piece wide" style="--i:2"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/e-shampoo-colageno.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/e-shampoo-colageno.webp")} alt="Etiqueta de Dyarg Essential: Shampoo Colágeno y Elastina" widths={[420, 840]} sizes="clamp(280px,40vw,420px)" /></button><span>Etiqueta · Shampoo Colágeno & Elastina</span></figure>
+      <figure class="piece" style="--i:3"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/e-mock-argan.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/e-mock-argan.webp")} alt="Mockup de la Ampolla Criogénica Argán de Dyarg Essential" widths={[240, 480]} sizes="clamp(200px,22vw,240px)" /></button><span>Mockup · Ampolla Argán</span></figure>
+      <figure class="piece wide" style="--i:4"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/e-shampoo-argan.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/e-shampoo-argan.webp")} alt="Etiqueta de Dyarg Essential: Shampoo Argán Coco Nut" widths={[420, 840]} sizes="clamp(280px,40vw,420px)" /></button><span>Etiqueta · Shampoo Argán Coco Nut</span></figure>
+      <figure class="piece" style="--i:5"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/e-mock-lino.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/e-mock-lino.webp")} alt="Mockup de la Ampolla Multivitamínico Semillas de Lino" widths={[240, 480]} sizes="clamp(200px,22vw,240px)" /></button><span>Mockup · Ampolla Semillas de Lino</span></figure>
+      <figure class="piece" style="--i:6"><button type="button" data-zoom={(await getImage({ src: import("../assets/portafolio/e-mock-lino-modelo.webp"), width: 1100 })).src}><Image src={import("../assets/portafolio/e-mock-lino-modelo.webp")} alt="Foto de producto con modelo y la Ampolla Semillas de Lino" widths={[240, 480]} sizes="clamp(200px,22vw,240px)" /></button><span>Foto de producto con modelo</span></figure>
+    </div>
+    <p class="swipe">Deslizá para ver más y tocá una pieza para agrandarla <i>→</i></p>
+  </div>
+</section>
+
+<dialog id="zoom" aria-label="Pieza ampliada"><img id="zoom-img" src="" alt=""><button type="button" id="zoom-close" aria-label="Cerrar">×</button></dialog>
+
+<!-- OPINIONES · crema -->
+<section class="band b-crema" id="opiniones">
+  <div class="wrap">
+    <h2 class="rv">Lo que dicen <span class="s">mis clientas</span></h2>
+    <div class="chat" id="chat">
+      <div class="msg" style="--i:0"><p>Jaz muchas gracias por estar atenta en todo, mi Instagram empezó a crecer con vos, ahora tengo más clientas en mi peluquería. Te voy a recomendar a otros colegas.</p><span class="t">12:07 a. m.</span></div>
+      <div class="msg" style="--i:1"><div class="who-s">~ Vane</div><p>Jazzz estamos muy conformes con tu trabajo, siempre estás bien predispuesta y resolvés súper rápido cualquier pedido que hacemos. Gracias y obvio te vamos a seguir recomendando! ❤️</p><span class="t">12:50 p. m.</span></div>
+      <div class="msg" style="--i:2"><p>Jaz, sos grosa y muy responsable en lo que hacés. Mi Instagram cambió gracias a vos. El volumen de clientas también. Te voy a recomendar a otras colegas 🫶</p><span class="t">5:45 p. m.</span></div>
+      <div class="msg" style="--i:3"><p>Hola Jaz, muy bueno el contenido y la estrategia que me armaste la verdad. Ya se está notando el crecimiento en el Instagram y los clientes. ¡No puedo estar más contento con tu laburo!</p><span class="t">8:51 p. m.</span></div>
+      <div class="msg" style="--i:4"><p>Jaz gracias por todo lo que estás haciendo por mi página. Desde que vos la estás atendiendo y haciendo todo el contenido, las clientas que tengo se interesan más por venir y hasta ha venido gente nueva, y eso que todavía no hicimos publicidad. Todos los días me estás generando contenido, ni siquiera te tengo que pedir: ya estás un paso más adelante.</p></div>
+      <div class="msg" style="--i:5"><p>Me encanta, la verdad que me gusta mucho cómo trabajás, me parece sutil, elegante y profesional. Vamos a lograr muchísimo con el tiempo, obviamente porque recién arrancamos, pero por el momento no tengo nada que no me guste 🥹🥰</p><span class="t">11:35 p. m.</span></div>
+      <div class="msg" style="--i:6;grid-column:1/-1"><div class="who-s">Hernán · Tempo escuela de música y artes</div><p>Jaz, es maravilloso lo que hacés como community. Hace mucho tiempo que trabajo con gente en lo que tiene que ver con marketing digital para mi escuela de música y arte y nunca vi publicaciones con tanto nivel de interacción y hechas para cada momento en especial de una manera muy certera, sutil, sensible y humana. ¡Realmente es para recomendar y felicitar!</p><span class="t">8:52 a. m.</span></div>
+    </div>
+    <div class="typing" aria-hidden="true"><i></i><i></i><i></i></div>
+  </div>
+</section>
+
+<!-- CONTACTO · turquesa -->
+<section class="band b-turq contact" id="contacto">
+  <div class="wave-top" aria-hidden="true"><svg viewBox="0 0 1800 40" preserveAspectRatio="none"><use href="#wavepath"/></svg></div>
+  <svg class="sun" viewBox="0 0 200 200" aria-hidden="true">
+    <g class="rays" fill="#FAEC7F">
+      <polygon points="100,2 106,24 94,24"/><polygon points="100,198 106,176 94,176"/><polygon points="2,100 24,94 24,106"/><polygon points="198,100 176,94 176,106"/>
+      <polygon points="31,31 49,44 44,49"/><polygon points="169,169 151,156 156,151"/><polygon points="169,31 156,49 151,44"/><polygon points="31,169 44,151 49,156"/>
+    </g>
+    <g class="core"><circle cx="100" cy="100" r="66" fill="#FCF4B9"/><circle cx="100" cy="100" r="50" fill="#FAEC7F"/></g>
+  </svg>
+  <div class="wrap" style="position:relative;z-index:2">
+    <h2 class="rv">¿Querés que tu marca crezca? <span class="s">Hablemos</span></h2>
+    <div class="services rv"><span>Community management</span><span>Creación de contenido</span><span class="y">Meta Ads</span><span>Branding</span></div>
+    <div class="actions rv">
+      <a class="wa" href="https://wa.me/5491134292032" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.6 11.6 0 0 0 4.4 3.9c1.7.7 2.3.8 3.1.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"/></svg>Escribime por WhatsApp</a>
+      <a class="web" href="https://luzsaracommunity.com" target="_blank" rel="noopener"><span class="web-l">Web</span><span class="web-u">luzsaracommunity.com</span><span class="web-a" aria-hidden="true">→</span></a>
+    </div>
+    <p class="data rv"><b>WhatsApp</b> +54 9 11 3429-2032</p>
+  </div>
+  <div class="waves" aria-hidden="true">
+    <svg class="w1" viewBox="0 0 2400 120" preserveAspectRatio="none"><path fill="#A8D0CB" d="M0 50 C200 20 400 80 600 50 S1000 20 1200 50 S1600 80 1800 50 S2200 20 2400 50 V120 H0Z"/></svg>
+    <svg class="w2" viewBox="0 0 2400 120" preserveAspectRatio="none"><path fill="#F1E5D5" d="M0 60 C200 90 400 30 600 60 S1000 90 1200 60 S1600 30 1800 60 S2200 90 2400 60 V120 H0Z"/></svg>
+    <svg class="w3" viewBox="0 0 2400 120" preserveAspectRatio="none"><path fill="#2C969A" d="M0 70 C300 50 300 90 600 70 S900 50 1200 70 S1500 90 1800 70 S2100 50 2400 70 V120 H0Z"/></svg>
+  </div>
+  <p class="foot">LUZSARACOMMUNITY · 2026</p>
+</section>
+
+<script>
+  import "../js/portafolio.js";
+</script>
+</body>
+</html>
